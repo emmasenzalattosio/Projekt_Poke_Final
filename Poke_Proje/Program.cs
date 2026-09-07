@@ -6,10 +6,17 @@ namespace Poke_Proje
     {
         static void Main(string[] args)
         {
+            Emoji();
+
             Arena arena = new Arena();
 
             NiceCute menu = new NiceCute(arena.Center, arena);
             menu.Start();
+        }
+
+        static void Emoji()
+        {
+            Console.OutputEncoding = System.Text.Encoding.UTF8;
         }
     }
 }
