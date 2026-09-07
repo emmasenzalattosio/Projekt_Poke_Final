@@ -38,12 +38,12 @@ namespace Poke_Proje
             }
 
             Console.Clear();
-            Console.WriteLine($"=== {Name}'s team ===");
-
+            List<string> lines = new List<string>();
             for (int i = 0; i < ass_poke.Count; i++)
             {
-                Console.WriteLine($"[{i + 1}] {ass_poke[i].Name} - HP: {ass_poke[i].GetCurrentHp()}/{ass_poke[i].GetMaxHp()}");
+                lines.Add($"[{i + 1}] {ass_poke[i].Name} - HP: {ass_poke[i].GetCurrentHp()}/{ass_poke[i].GetMaxHp()}");
             }
+            ConsoleUI.DrawFrame($"🎒 {Name}'s team", lines, ConsoleColor.Cyan, ConsoleColor.Yellow);
 
             int choice = ReadNumber(1, ass_poke.Count);
             return ass_poke[choice - 1];
@@ -71,21 +71,21 @@ namespace Poke_Proje
         public void ShowPokemon()
         {
             Console.Clear();
-            Console.WriteLine($"=== {Name}'s Pokémon ===");
 
             if (ass_poke.Count == 0)
             {
-                Console.WriteLine("No Pokémon assigned yet.");
+                ConsoleUI.DrawFrame($"🎒 {Name}'s Pokémon", new[] { "No Pokémon assigned yet." }, ConsoleColor.Cyan, ConsoleColor.Yellow);
                 Console.WriteLine("\nPress any key to return to the menu...");
                 Console.ReadKey(true);
                 return;
             }
 
+            List<string> lines = new List<string>();
             foreach (Pokemon p in ass_poke)
             {
-                Console.WriteLine(p.ShowStatus());
-                Console.WriteLine();
+                lines.Add(p.ShowStatus().TrimEnd('\n', '\r'));
             }
+            ConsoleUI.DrawFrame($"🎒 {Name}'s Pokémon", lines, ConsoleColor.Cyan, ConsoleColor.Yellow);
 
             Console.WriteLine("Press any key to return to the menu...");
             Console.ReadKey(true);

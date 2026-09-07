@@ -57,11 +57,8 @@ namespace Poke_Proje
                 Console.WriteLine();
                 Console.ResetColor();
 
-
-                for (int i = 0; i < trainers.Count; i++)
-                {
-                    ConsoleUI.WriteCenteredHighlighted($"{trainers[i].Name} - Chan", i == selectedIndex);
-                }
+                List<string> trainerNames = trainers.Select(t => $"🧑‍🎓 {t.Name} - Chan").ToList();
+                ConsoleUI.WriteMenuFrame("🎮 Choose Your Trainer 🎮", trainerNames, selectedIndex, ConsoleColor.Green);
 
                 ConsoleKey key = Console.ReadKey(true).Key;
 
@@ -93,12 +90,13 @@ namespace Poke_Proje
         {
             string[] options =
             {
-                "View Pokémon",
-                "Search Pokémon",
-                "Show Trainers",
-                "Start Battle",
-                "Heal Team",
-                "Exit"
+                "👀 View Pokémon",
+                "🔍 Search Pokémon",
+                "🧑‍🤝‍🧑 Show Trainers",
+                "⚔️  Start Battle",
+                "💊 Heal Team",
+                "🕵️  Team WH Ambush",
+                "🚪 Exit"
             };
 
             int selected = 0;
@@ -108,23 +106,8 @@ namespace Poke_Proje
                 Console.Clear();
                 DrawBanner();
                 Console.WriteLine();
-                Console.WriteLine();
-                ConsoleUI.WriteCentered($"Trainer: {trainer.Name}");
-                ConsoleUI.WriteCentered("====================================");
-                Console.WriteLine();
 
-                for (int i = 0; i < options.Length; i++)
-                {
-
-                    //    Console.BackgroundColor = ConsoleColor.Green;
-                    //    Console.ForegroundColor = ConsoleColor.Black;
-                    //    Console.WriteLine($" > {options[i]}");
-                    //    Console.ResetColor();
-                    //
-                    ConsoleUI.WriteCenteredHighlighted($"{options[i]} ", i == selected);
-
-
-                }
+                ConsoleUI.WriteMenuFrame($"🧢 Trainer: {trainer.Name} 🧢", options, selected, ConsoleColor.DarkMagenta);
 
                 ConsoleKey key = Console.ReadKey(true).Key;
 
@@ -181,6 +164,12 @@ namespace Poke_Proje
                             break;
 
                         case 5:
+                            Arena.RocketEncounter(trainer);
+                            ConsoleUI.WriteCentered("\nPress any key to go back to the main menu...");
+                            Console.ReadKey(true);
+                            break;
+
+                        case 6:
                             Console.Clear();
                             ConsoleUI.WriteCentered("Goodbye, trainer! See you at the next battle!");
                             Console.ReadKey(true);

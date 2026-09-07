@@ -7,6 +7,8 @@ namespace Poke_Proje
     public class Arena
     {
         public PokemonCenter Center { get; set; }
+        public TeamWH RocketTeam;
+        private Pokemon RocketGuard;
         private Random random = new Random();
 
         public Arena()
@@ -259,6 +261,16 @@ namespace Poke_Proje
             Swalot.AddAttack("Strahlende-Persöhnlichkeit", 100);
             Center.AddPokemon(Swalot);
             Aman.AssignPokemon(Swalot);
+
+            // Team WH, they be lurking around ready to yoink someone's pokeon
+            RocketTeam = new TeamWH("Team WH");
+            Chaotic rocketGuardPoke = new Chaotic("[Team WH Grunt]", "Trainer: [Team WH]", 50, 100, 60, 50);
+            rocketGuardPoke.AddAttack("Yoink Slam", 50);
+            rocketGuardPoke.AddAttack("Sneaky Snatch", 40);
+            rocketGuardPoke.AddAttack("Cheap Shot", 60);
+            rocketGuardPoke.AddAttack("Bounce", 30);
+            RocketTeam.AssignPokemon(rocketGuardPoke);
+            RocketGuard = rocketGuardPoke;
         }
 
         private int ReadNumber(int min, int max)
@@ -298,11 +310,12 @@ namespace Poke_Proje
             else
             {
                 Console.Clear();
-                Console.WriteLine("=== Choose your fighter ===");
+                List<string> fighterLines = new List<string>();
                 for (int i = 0; i < all.Count; i++)
                 {
-                    Console.WriteLine($"[{i + 1}] {all[i].Name} - HP: {all[i].GetCurrentHp()}/{all[i].GetMaxHp()}");
+                    fighterLines.Add($"[{i + 1}] {all[i].Name} - HP: {all[i].GetCurrentHp()}/{all[i].GetMaxHp()}");
                 }
+                ConsoleUI.DrawFrame("🥊 Choose your fighter", fighterLines, ConsoleColor.Cyan, ConsoleColor.Yellow);
 
                 fighter = all[ReadNumber(1, all.Count) - 1];
             }
@@ -315,39 +328,106 @@ namespace Poke_Proje
             }
 
             Console.Clear();
-            Console.WriteLine("=== Choose your enemy ===");
+            List<string> enemyLines = new List<string>();
             for (int i = 0; i < enemyOptions.Count; i++)
             {
-                Console.WriteLine($"[{i + 1}] {enemyOptions[i].Name} - HP: {enemyOptions[i].GetCurrentHp()}/{enemyOptions[i].GetMaxHp()}");
+                enemyLines.Add($"[{i + 1}] {enemyOptions[i].Name} - HP: {enemyOptions[i].GetCurrentHp()}/{enemyOptions[i].GetMaxHp()}");
             }
+            ConsoleUI.DrawFrame("🎯 Choose your enemy", enemyLines, ConsoleColor.Red, ConsoleColor.Yellow);
 
             Pokemon enemy = enemyOptions[ReadNumber(1, enemyOptions.Count) - 1];
-            Console.WriteLine($"\n{fighter.Name} VS {enemy.Name}!\n");
+            ConsoleUI.WriteCentered($"\n🔥 {fighter.Name} VS {enemy.Name}! 🔥\n");
 
             Fight(fighter, enemy);
+        }
+
+        // this is where Team WH shows up outta nowhere and yoinks the trainer's whole team.
+        // if the trainer is down bad enough to fight back, they get a shot at winning it back.
+        public void RocketEncounter(Trainer trainer)
+        {
+            bool hadPokemon = trainer.HasPokemon();
+            RocketTeam.StealPokemon(trainer);
+
+            if (!hadPokemon)
+            {
+                return;
+            }
+
+            // everything Team WH is holding except their own guard pokemon is loot they just stole
+            List<Pokemon> stolenPokemon = RocketTeam.ass_poke.Where(p => p != RocketGuard).ToList();
+
+            RocketTeam.AskToBecomeRealTrainer();
+            ConsoleKey key = Console.ReadKey(true).Key;
+
+            if (key != ConsoleKey.Y)
+            {
+                Console.WriteLine($"\n{trainer.Name} chickens out for now, Team WH keeps the loot...");
+                return;
+            }
+
+            List<Pokemon> ownOptions = Center.GetAllPokeon().Where(p => !RocketTeam.ass_poke.Contains(p)).ToList();
+
+            if (ownOptions.Count == 0)
+            {
+                Console.WriteLine("No pokeon left in the center to fight with, come back later.");
+                return;
+            }
+
+            Console.Clear();
+            List<string> ownLines = new List<string>();
+            for (int i = 0; i < ownOptions.Count; i++)
+            {
+                ownLines.Add($"[{i + 1}] {ownOptions[i].Name} - HP: {ownOptions[i].GetCurrentHp()}/{ownOptions[i].GetMaxHp()}");
+            }
+            ConsoleUI.DrawFrame("🕵️ Choose your fighter to win your pokeon back", ownLines, ConsoleColor.Magenta, ConsoleColor.Yellow);
+
+            Pokemon championPick = ownOptions[ReadNumber(1, ownOptions.Count) - 1];
+            Pokemon rocketFighter = RocketGuard;
+            rocketFighter.Heal(); // patch em up so every ambush is a fair fight
+
+            Console.WriteLine($"\n{championPick.Name} VS {rocketFighter.Name}!\n");
+            Fight(championPick, rocketFighter);
+
+            if (rocketFighter.IsDefeated() && !championPick.IsDefeated())
+            {
+                Console.WriteLine("\nYou beat Team WH!! Here's your pokeon back.");
+                foreach (Pokemon p in stolenPokemon)
+                {
+                    RocketTeam.ass_poke.Remove(p);
+                    trainer.AssignPokemon(p);
+                }
+            }
+            else
+            {
+                Console.WriteLine("\nTeam WH keeps your pokeon for now, git gud and try again.");
+            }
         }
 
         private void Fight(Pokemon me, Pokemon enemy)
         {
             Console.Clear();
-            Console.WriteLine("=== BATTLE START ===");
-            Console.WriteLine($"{me.Name} VS {enemy.Name}");
-            Console.WriteLine($"{me.GetBattleStatus()}");
-            Console.WriteLine($"{enemy.GetBattleStatus()}\n");
+            ConsoleUI.DrawFrame("⚔️ BATTLE START", new[]
+            {
+                $"{me.Name} VS {enemy.Name}",
+                me.GetBattleStatus(),
+                enemy.GetBattleStatus()
+            }, ConsoleColor.Red, ConsoleColor.Yellow);
 
             int round = 1;
 
             while (!me.IsDefeated() && !enemy.IsDefeated())
             {
-                Console.WriteLine($"--- Round {round} ---");
-                Console.WriteLine($"{me.Name}: HP {me.GetCurrentHp()}/{me.GetMaxHp()}");
-                Console.WriteLine($"{enemy.Name}: HP {enemy.GetCurrentHp()}/{enemy.GetMaxHp()}");
-                Console.WriteLine("Choose your attack:");
+                Console.WriteLine();
+                ConsoleUI.WriteCentered($"--- Round {round} ---");
+                ConsoleUI.WriteCentered($"{me.Name}: HP {me.GetCurrentHp()}/{me.GetMaxHp()}");
+                ConsoleUI.WriteCentered($"{enemy.Name}: HP {enemy.GetCurrentHp()}/{enemy.GetMaxHp()}");
 
+                List<string> attackLines = new List<string>();
                 for (int i = 0; i < me.attacks.Count; i++)
                 {
-                    Console.WriteLine($"[{i + 1}] {me.attacks[i].Name} [{me.attacks[i].Damage} dmg]");
+                    attackLines.Add($"[{i + 1}] {me.attacks[i].Name} [{me.attacks[i].Damage} dmg]");
                 }
+                ConsoleUI.DrawFrame("🎮 Choose your attack", attackLines, ConsoleColor.Cyan, ConsoleColor.Yellow);
 
                 Attack playerAttack = me.attacks[ReadNumber(1, me.attacks.Count) - 1];
                 Console.WriteLine($"\n{me.Name} uses {playerAttack.Name}!");
@@ -370,26 +450,26 @@ namespace Poke_Proje
             }
 
             Console.Clear();
-            Console.WriteLine("========================================");
-            Console.WriteLine("             BATTLE RESULT");
-            Console.WriteLine("========================================");
+
+            List<string> resultLines = new List<string>();
 
             if (enemy.IsDefeated() && !me.IsDefeated())
             {
-                Console.WriteLine($"{me.Name} wins the battle!");
+                resultLines.Add($"🏆 {me.Name} wins the battle!");
             }
             else if (me.IsDefeated() && !enemy.IsDefeated())
             {
-                Console.WriteLine($"{enemy.Name} wins the battle!");
+                resultLines.Add($"🏆 {enemy.Name} wins the battle!");
             }
             else
             {
-                Console.WriteLine("It's a draw! Both Pokémon are down.");
+                resultLines.Add("🤝 It's a draw! Both Pokémon are down.");
             }
 
-            Console.WriteLine($"{me.Name}: HP {me.GetCurrentHp()}/{me.GetMaxHp()}");
-            Console.WriteLine($"{enemy.Name}: HP {enemy.GetCurrentHp()}/{enemy.GetMaxHp()}");
-            Console.WriteLine("========================================");
+            resultLines.Add($"{me.Name}: HP {me.GetCurrentHp()}/{me.GetMaxHp()}");
+            resultLines.Add($"{enemy.Name}: HP {enemy.GetCurrentHp()}/{enemy.GetMaxHp()}");
+
+            ConsoleUI.DrawFrame("🏁 BATTLE RESULT", resultLines, ConsoleColor.Green, ConsoleColor.Yellow);
         }
     }
 }

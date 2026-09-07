@@ -4,19 +4,19 @@ using System.Text;
 
 namespace Poke_Proje
 {
-    public class TeamRocket : Trainer
+    public class TeamWH : Trainer
     {
         private string[] evilQuotes;
         private Random rnd;
 
-        public TeamRocket(string name) : base(name)
+        public TeamWH(string name) : base(name)
         {
             rnd = new Random();
             evilQuotes = new string[]
             {
                 "Prepare for trouble, make it double!!",
                 "To protect the world from devastation... lol jk we stealin yo shit",
-                "Team Rocket blast off at the speed of light, surrender now or prepare to fight",
+                "Team WH blast off at the speed of light, surrender now or prepare to fight",
                 "Your pokeon are ours now bestie"
             };
         }
@@ -24,14 +24,14 @@ namespace Poke_Proje
         public void StealPokemon(Trainer victim)
         {
             Console.ForegroundColor = ConsoleColor.Magenta;
-            Console.WriteLine($"\n!!! TEAM ROCKET APPEARED OUTTA NOWHERE !!!");
+            Console.WriteLine($"\n!!! TEAM WH APPEARED OUTTA NOWHERE !!!");
             Console.WriteLine($"{Name}: \"{evilQuotes[rnd.Next(evilQuotes.Length)]}\"");
             Console.ResetColor();
 
             if (!victim.HasPokemon())
             {
                 Console.WriteLine($"{Name}: \"Bruh you broke, aint got no pokeon to steal lmao\"");
-                Console.WriteLine("*Team Rocket walks away disappointed*");
+                Console.WriteLine("*Team WH walks away disappointed*");
                 return;
             }
 

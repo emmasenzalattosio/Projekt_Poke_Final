@@ -60,11 +60,12 @@ namespace Poke_Proje
 
         public void ShowAllTrainers()
         {
-            Console.WriteLine("All Trainers: ");
+            List<string> lines = new List<string>();
             foreach (Trainer t in trainerList)
             {
-                Console.WriteLine($"- {t.Name} ({t.ass_poke.Count} Pokémon)");
+                lines.Add($"- {t.Name} ({t.ass_poke.Count} Pokémon)");
             }
+            ConsoleUI.DrawFrame("👥 All Trainers", lines, ConsoleColor.Cyan, ConsoleColor.Yellow);
         }
 
         public Pokemon SearchPokemon(string name)
@@ -82,16 +83,11 @@ namespace Poke_Proje
 
             if (found != null)
             {
-                Console.ForegroundColor = ConsoleColor.Green;
-                Console.WriteLine($"\nGefunden {found.Name}");
-                Console.ResetColor();
-                Console.WriteLine(found.ShowStatus());
+                ConsoleUI.DrawFrame($"✅ Gefunden {found.Name}", new[] { found.ShowStatus().TrimEnd('\n', '\r') }, ConsoleColor.Green, ConsoleColor.Yellow);
             }
             else
             {
-                Console.ForegroundColor = ConsoleColor.Red;
-                Console.WriteLine("\nPokemon nicht gefunden");
-                Console.ResetColor();
+                ConsoleUI.DrawFrame("❌ Suchergebnis", new[] { "Pokemon nicht gefunden" }, ConsoleColor.Red, ConsoleColor.Yellow);
             }
 
             return found;
