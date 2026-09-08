@@ -112,5 +112,39 @@ namespace Poke_Proje
 
             DrawFrame(title, lines, borderColor, ConsoleColor.Yellow);
         }
+
+        /// <summary>
+        /// Draws a single frame that contains one or more "banner" blocks of ASCII art/text
+        /// followed by a selectable menu list. Use this instead of drawing a banner and a
+        /// menu frame separately, so everything ends up inside ONE big frame.
+        /// </summary>
+        /// <param name="bannerBlocks">Any number of multi-line text blocks to show above the menu (e.g. logo art). Pass none if not needed.</param>
+        public static void WriteFramedScreen(string title, IEnumerable<string> items, int selectedIndex, ConsoleColor borderColor = ConsoleColor.DarkMagenta, ConsoleColor titleColor = ConsoleColor.Yellow, params string[] bannerBlocks)
+        {
+            List<string> lines = new List<string>();
+
+            if (bannerBlocks != null)
+            {
+                foreach (string block in bannerBlocks)
+                {
+                    if (string.IsNullOrEmpty(block))
+                    {
+                        continue;
+                    }
+
+                    lines.AddRange(block.Split(new[] { "\r\n", "\n" }, StringSplitOptions.None));
+                    lines.Add(string.Empty);
+                }
+            }
+
+            List<string> options = items.ToList();
+            for (int i = 0; i < options.Count; i++)
+            {
+                string prefix = i == selectedIndex ? "▶" : " ";
+                lines.Add($"{prefix} {options[i]}");
+            }
+
+            DrawFrame(title, lines, borderColor, titleColor);
+        }
     }
 }
