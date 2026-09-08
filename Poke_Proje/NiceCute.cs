@@ -59,7 +59,7 @@ namespace Poke_Proje
                 Console.Clear();
 
                 List<string> trainerNames = trainers.Select(t => $"🧑‍🎓 {t.Name} - Chan").ToList();
-                ConsoleUI.WriteFramedScreen("🎮 Choose Your Trainer 🎮", trainerNames, selectedIndex, ConsoleColor.Green, ConsoleColor.Yellow, BannerText, chooseTrainerArt);
+                ConsoleUI.WriteCenteredMenu("🎮 Choose Your Trainer 🎮", trainerNames, selectedIndex, ConsoleColor.Yellow, BannerText, chooseTrainerArt);
 
                 ConsoleKey key = Console.ReadKey(true).Key;
 
@@ -106,7 +106,7 @@ namespace Poke_Proje
             {
                 Console.Clear();
 
-                ConsoleUI.WriteFramedScreen($"🧢 Trainer: {trainer.Name} 🧢", options, selected, ConsoleColor.DarkMagenta, ConsoleColor.Yellow, BannerText);
+                ConsoleUI.WriteCenteredMenu($"🧢 Trainer: {trainer.Name} 🧢", options, selected, ConsoleColor.Yellow, BannerText);
 
                 ConsoleKey key = Console.ReadKey(true).Key;
 

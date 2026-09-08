@@ -294,7 +294,7 @@ namespace Poke_Proje
             if (all.Count == 0)
             {
                 Console.Clear();
-                ConsoleUI.DrawFrame("🥊 Start Battle", new[] { "There are no Pokémon in the center to battle.", "", "Press any key to continue..." }, ConsoleColor.Cyan, ConsoleColor.Yellow);
+                ConsoleUI.WriteCenteredScreen("🥊 Start Battle", new[] { "There are no Pokémon in the center to battle.", "", "Press any key to continue..." }, ConsoleColor.Yellow);
                 Console.ReadKey(true);
                 return;
             }
@@ -317,7 +317,7 @@ namespace Poke_Proje
                 {
                     fighterLines.Add($"[{i + 1}] {all[i].Name} - HP: {all[i].GetCurrentHp()}/{all[i].GetMaxHp()}");
                 }
-                ConsoleUI.DrawFrame("🥊 Choose your fighter", fighterLines, ConsoleColor.Cyan, ConsoleColor.Yellow);
+                ConsoleUI.WriteCenteredScreen("🥊 Choose your fighter", fighterLines, ConsoleColor.Yellow);
 
                 fighter = all[ReadNumber(1, all.Count) - 1];
             }
@@ -326,7 +326,7 @@ namespace Poke_Proje
             if (enemyOptions.Count == 0)
             {
                 Console.Clear();
-                ConsoleUI.DrawFrame("🎯 Choose your enemy", new[] { "No enemy Pokémon available.", "", "Press any key to continue..." }, ConsoleColor.Red, ConsoleColor.Yellow);
+                ConsoleUI.WriteCenteredScreen("🎯 Choose your enemy", new[] { "No enemy Pokémon available.", "", "Press any key to continue..." }, ConsoleColor.Yellow);
                 Console.ReadKey(true);
                 return;
             }
@@ -337,7 +337,7 @@ namespace Poke_Proje
             {
                 enemyLines.Add($"[{i + 1}] {enemyOptions[i].Name} - HP: {enemyOptions[i].GetCurrentHp()}/{enemyOptions[i].GetMaxHp()}");
             }
-            ConsoleUI.DrawFrame("🎯 Choose your enemy", enemyLines, ConsoleColor.Red, ConsoleColor.Yellow);
+            ConsoleUI.WriteCenteredScreen("🎯 Choose your enemy", enemyLines, ConsoleColor.Yellow);
 
             Pokemon enemy = enemyOptions[ReadNumber(1, enemyOptions.Count) - 1];
 
@@ -354,7 +354,7 @@ namespace Poke_Proje
                 Console.Clear();
                 stealLines.Add(string.Empty);
                 stealLines.Add("Press any key to continue...");
-                ConsoleUI.DrawFrame("🕵️ Team WH Ambush", stealLines, ConsoleColor.Magenta, ConsoleColor.Yellow);
+                ConsoleUI.WriteCenteredScreen("🕵️ Team WH Ambush", stealLines, ConsoleColor.Yellow);
                 Console.ReadKey(true);
                 return;
             }
@@ -366,13 +366,13 @@ namespace Poke_Proje
             stealLines.Add("---> Press [Y] to fight for your pokeon back, [N] to walk away <---");
 
             Console.Clear();
-            ConsoleUI.DrawFrame("🕵️ Team WH Ambush", stealLines, ConsoleColor.Magenta, ConsoleColor.Yellow);
+            ConsoleUI.WriteCenteredScreen("🕵️ Team WH Ambush", stealLines, ConsoleColor.Yellow);
             ConsoleKey key = Console.ReadKey(true).Key;
 
             if (key != ConsoleKey.Y)
             {
                 Console.Clear();
-                ConsoleUI.DrawFrame("🕵️ Team WH Ambush", new[] { $"{trainer.Name} chickens out for now, Team WH keeps the loot...", "", "Press any key to continue..." }, ConsoleColor.Magenta, ConsoleColor.Yellow);
+                ConsoleUI.WriteCenteredScreen("🕵️ Team WH Ambush", new[] { $"{trainer.Name} chickens out for now, Team WH keeps the loot...", "", "Press any key to continue..." }, ConsoleColor.Yellow);
                 Console.ReadKey(true);
                 return;
             }
@@ -382,7 +382,7 @@ namespace Poke_Proje
             if (ownOptions.Count == 0)
             {
                 Console.Clear();
-                ConsoleUI.DrawFrame("🕵️ Team WH Ambush", new[] { "No pokeon left in the center to fight with, come back later.", "", "Press any key to continue..." }, ConsoleColor.Magenta, ConsoleColor.Yellow);
+                ConsoleUI.WriteCenteredScreen("🕵️ Team WH Ambush", new[] { "No pokeon left in the center to fight with, come back later.", "", "Press any key to continue..." }, ConsoleColor.Yellow);
                 Console.ReadKey(true);
                 return;
             }
@@ -393,7 +393,7 @@ namespace Poke_Proje
             {
                 ownLines.Add($"[{i + 1}] {ownOptions[i].Name} - HP: {ownOptions[i].GetCurrentHp()}/{ownOptions[i].GetMaxHp()}");
             }
-            ConsoleUI.DrawFrame("🕵️ Choose your fighter to win your pokeon back", ownLines, ConsoleColor.Magenta, ConsoleColor.Yellow);
+            ConsoleUI.WriteCenteredScreen("🕵️ Choose your fighter to win your pokeon back", ownLines, ConsoleColor.Yellow);
 
             Pokemon championPick = ownOptions[ReadNumber(1, ownOptions.Count) - 1];
             Pokemon rocketFighter = RocketGuard;
@@ -421,21 +421,21 @@ namespace Poke_Proje
             outcomeLines.Add("Press any key to continue...");
 
             Console.Clear();
-            ConsoleUI.DrawFrame("🕵️ Ambush Result", outcomeLines, ConsoleColor.Magenta, ConsoleColor.Yellow);
+            ConsoleUI.WriteCenteredScreen("🕵️ Ambush Result", outcomeLines, ConsoleColor.Yellow);
             Console.ReadKey(true);
         }
 
         private void Fight(Pokemon me, Pokemon enemy)
         {
             Console.Clear();
-            ConsoleUI.DrawFrame("⚔️ BATTLE START", new[]
+            ConsoleUI.WriteCenteredScreen("⚔️ BATTLE START", new[]
             {
                 $"{me.Name} VS {enemy.Name}",
                 me.GetBattleStatus(),
                 enemy.GetBattleStatus(),
                 "",
                 "Press any key to continue..."
-            }, ConsoleColor.Red, ConsoleColor.Yellow);
+            }, ConsoleColor.Yellow);
             Console.ReadKey(true);
 
             int round = 1;
@@ -459,7 +459,7 @@ namespace Poke_Proje
                 {
                     roundLines.Add($"[{i + 1}] {me.attacks[i].Name} [{me.attacks[i].Damage} dmg]");
                 }
-                ConsoleUI.DrawFrame("🎮 Choose your attack", roundLines, ConsoleColor.Cyan, ConsoleColor.Yellow);
+                ConsoleUI.WriteCenteredScreen("🎮 Choose your attack", roundLines, ConsoleColor.Yellow);
 
                 Attack playerAttack = me.attacks[ReadNumber(1, me.attacks.Count) - 1];
                 enemy.TakeDamage(playerAttack.Damage);
@@ -507,7 +507,7 @@ namespace Poke_Proje
             resultLines.Add(string.Empty);
             resultLines.Add("Press any key to continue...");
 
-            ConsoleUI.DrawFrame("🏁 BATTLE RESULT", resultLines, ConsoleColor.Green, ConsoleColor.Yellow);
+            ConsoleUI.WriteCenteredScreen("🏁 BATTLE RESULT", resultLines, ConsoleColor.Yellow);
             Console.ReadKey(true);
         }
     }
