@@ -68,8 +68,10 @@ namespace Poke_Proje
                 }
             }
 
-            int width = Math.Max(36, content.Max(line => line.Length) + 2);
-            int leftPadding = Math.Max(0, (Console.WindowWidth - width) / 2);
+            int rawWidth = Math.Max(36, content.Max(line => line.Length) + 2);
+            int maxWidth = Math.Max(20, Console.WindowWidth - 2); // keep a sliver of free border, don't force-wrap
+            int width = Math.Min(rawWidth, maxWidth);
+            int leftPadding = Math.Max(0, (Console.WindowWidth - (width + 4)) / 2);
 
             Console.ForegroundColor = borderColor;
             Console.WriteLine(new string(' ', leftPadding) + "╔" + new string('═', width + 2) + "╗");
@@ -77,7 +79,8 @@ namespace Poke_Proje
 
             Console.ForegroundColor = titleColor;
             string titleLine = $" {title.Trim()} ";
-            Console.WriteLine(new string(' ', leftPadding) + "║" + titleLine.PadRight(width + 1) + "║");
+            titleLine = titleLine.Length > width + 1 ? titleLine.Substring(0, width + 1) : titleLine.PadRight(width + 1);
+            Console.WriteLine(new string(' ', leftPadding) + "║" + titleLine + "║");
 
             Console.ForegroundColor = borderColor;
             Console.WriteLine(new string(' ', leftPadding) + "╠" + new string('═', width + 2) + "╣");
