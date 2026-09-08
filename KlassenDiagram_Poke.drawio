@@ -1,0 +1,601 @@
+<mxfile host="Electron">
+  <diagram name="Seite-1" id="XyvRo4S44DAJVatBygUR">
+    <mxGraphModel dx="3768" dy="513" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <UserObject label="" mermaidData="{&#xa;  &quot;data&quot;: &quot;---\nconfig:\n  layout: elk\n---\nclassDiagram\ndirection TB\n    class Program {\n\t    -Main(args: string[]) void\n    }\n\n    class NiceCute {\n\t    -Center : PokemonCenter\n\t    -Arena : Arena\n\t    +NiceCute(center: PokemonCenter, arena: Arena)\n\t    +Start() void\n\t    -SelectTrainer() Trainer\n\t    -ShowActionMenu(trainer: Trainer) void\n\t    -DrawBanner() void\n    }\n\n    class ConsoleUI {\n\t    +WriteCentered(text: string) void\n\t    +WriteCenteredHighlighted(text: string, selected: bool, boxWidth: int) void\n\t    +DrawFrame(title: string, lines: IEnumerable~string~, borderColor: ConsoleColor, titleColor: ConsoleColor) void\n\t    +WriteMenuFrame(title: string, items: IEnumerable~string~, selectedIndex: int, borderColor: ConsoleColor) void\n    }\n\n    class Arena {\n\t    +Center : PokemonCenter\n\t    +RocketTeam : TeamWH\n\t    -RocketGuard : Pokemon\n\t    -random : Random\n\t    +Arena()\n\t    -ReadNumber(min: int, max: int) int\n\t    +StartBattle(trainer: Trainer) void\n\t    +RocketEncounter(trainer: Trainer) void\n\t    -Fight(me: Pokemon, enemy: Pokemon) void\n    }\n\n    class PokemonCenter {\n\t    -pokemonList : List~Pokemon~\n\t    -trainerList : List~Trainer~\n\t    +PokemonCenter()\n\t    +GetAllPokeon() List~Pokemon~\n\t    +GetAllTrainers() List~Trainer~\n\t    +AddPokemon(pokemon: Pokemon) void\n\t    +AddTrainer(trainer: Trainer) void\n\t    +ShowAllPokemon() void\n\t    +ShowAllTrainers() void\n\t    +SearchPokemon(name: string) Pokemon\n\t    +AssignPokeon(pokemon: Pokemon, trainer: Trainer) void\n\t    +GetBehavior(pokemon: Pokemon) void\n\t    +HealPokemon(pokemon: Pokemon) void\n\t    +HealPokemon(name: string) void\n\t    +RemovePokemon(pokemon: Pokemon) bool\n    }\n\n    class Trainer {\n\t    +Name : string\n\t    +ass_poke : List~Pokemon~\n\t    +Trainer(name: string)\n\t    -ReadNumber(min: int, max: int) int\n\t    +ChoosePokemonFromTeam() Pokemon\n\t    +AssignPokemon(pokemon: Pokemon) void\n\t    +ShowPokemon() void\n\t    +HealPokemon(pokemon: Pokemon) void\n\t    +HealPokemon(name: string) void\n\t    +HealTeam() void\n\t    +ClearTeam() void\n\t    +HasPokemon() bool\n    }\n\n    class TeamWH {\n\t    -evilQuotes : string[]\n\t    -rnd : Random\n\t    +TeamWH(name: string)\n\t    +StealPokemon(victim: Trainer) void\n\t    +AskToBecomeRealTrainer() void\n    }\n\n    class Pokemon {\n\t    +Name : string\n\t    #Trainer : string\n\t    #Level : int\n\t    #HP : int\n\t    #MaxHP : int\n\t    #AttackDamage : int\n\t    #Defense : int\n\t    +attacks : List~Attack~\n\t    #Pokemon(name: string, trainer: string, level: int, hp: int, attackDamage: int, defense: int)\n\t    +Behavior() string*\n\t    +SetTrainer(trainer: string) void\n\t    +GetCurrentHp() int\n\t    +GetMaxHp() int\n\t    +GetBattleStatus() string\n\t    +AddAttack(name: string, damage: int) void\n\t    +Attack(p2: Pokemon, attack: Attack) int\n\t    +TakeDamage(damage: int) void\n\t    +IsDefeated() bool\n\t    +Heal() void\n\t    +ShowStatus() string\n    }\n\n    class Dramatic {\n\t    +Dramatic(name, trainer, level, hp, attack, defense)\n\t    +Behavior() string\n    }\n\n    class Chill {\n\t    +Chill(name, trainer, level, hp, attack, defense)\n\t    +Behavior() string\n    }\n\n    class Chaotic {\n\t    +Chaotic(name, trainer, level, hp, attack, defense)\n\t    +Behavior() string\n    }\n\n    class Sneaky {\n\t    +Sneaky(name, trainer, level, hp, attackdamage, defense)\n\t    +Behavior() string\n    }\n\n    class Attack {\n\t    +Name : string\n\t    +Damage : int\n\t    +Attack(name: string, damage: int)\n    }\n\n    class IBattle {\n\t    +Attack(p2: Pokemon, attack: Attack) int\n\t    +IsDefeated() bool\n    }\n\n    class IHeal {\n\t    +Heal() void\n\t    +ShowStatus() string\n    }\n\n\t&lt;&lt;static&gt;&gt; ConsoleUI\n\t&lt;&lt;abstract&gt;&gt; Pokemon\n\t&lt;&lt;interface&gt;&gt; IBattle\n\t&lt;&lt;interface&gt;&gt; IHeal\nProgram ..&gt; NiceCute : creates\nProgram ..&gt; Arena : creates\nNiceCute --&gt; Arena : uses\nNiceCute --&gt; PokemonCenter : uses\nArena *-- PokemonCenter : owns\nArena *-- TeamWH : owns\nPokemon &lt;|-- Dramatic\nPokemon &lt;|-- Chill\nPokemon &lt;|-- Chaotic\nPokemon &lt;|-- Sneaky\nTrainer &lt;|-- TeamWH\nPokemon ..|&gt; IBattle\nPokemon ..|&gt; IHeal\nTrainer \&quot;1\&quot; o-- \&quot;0..5\&quot; Pokemon : Team\nPokemonCenter \&quot;1\&quot; o-- \&quot;0..*\&quot; Pokemon : manages\nPokemonCenter \&quot;1\&quot; o-- \&quot;0..*\&quot; Trainer : manages\nPokemon \&quot;1\&quot; *-- \&quot;0..4\&quot; Attack : has\n&quot;,&#xa;  &quot;config&quot;: null&#xa;}" id="P125q-w5StolGaf0o1yt-298">
+          <mxCell connectable="0" parent="1" style="group;transparentBounds=1;editIcon=1;lockedGroup=0;groupPadding=10;" vertex="1">
+            <mxGeometry as="geometry" />
+          </mxCell>
+        </UserObject>
+        <UserObject label="&lt;b&gt;Program&lt;/b&gt;" mermaidId="n:Program" mermaidBaseStyle="swimlane;html=1;fontStyle=0;fontSize=16;align=center;verticalAlign=middle;horizontal=1;childLayout=stackLayout;startSize=48;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=0;marginTop=12;marginBottom=12;stackSpacing=0;swimlaneFillColor=light-dark(#ECECFF,#1f2020);whiteSpace=wrap;fillColor=light-dark(#ECECFF,#1f2020);strokeColor=light-dark(#9370DB,#cccccc);fontColor=light-dark(#333333,#cccccc);fontFamily=Trebuchet MS,Verdana,Arial,sans-serif;" mermaidBaseValue="&lt;b&gt;Program&lt;/b&gt;" id="P125q-w5StolGaf0o1yt-299">
+          <mxCell parent="P125q-w5StolGaf0o1yt-298" style="swimlane;html=1;fontStyle=0;fontSize=16;align=center;verticalAlign=middle;horizontal=1;childLayout=stackLayout;startSize=48;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=0;marginTop=12;marginBottom=12;stackSpacing=0;swimlaneFillColor=light-dark(#ECECFF,#1f2020);whiteSpace=wrap;fillColor=light-dark(#ECECFF,#1f2020);strokeColor=light-dark(#9370DB,#cccccc);fontColor=light-dark(#333333,#cccccc);fontFamily=Trebuchet MS,Verdana,Arial,sans-serif;" vertex="1">
+            <mxGeometry height="116" width="231" x="30" y="2401.33" as="geometry" />
+          </mxCell>
+        </UserObject>
+        <mxCell id="P125q-w5StolGaf0o1yt-300" parent="P125q-w5StolGaf0o1yt-299" style="line;strokeWidth=1;fillColor=none;spacingLeft=3;spacingRight=3;rotatable=0;points=[];strokeColor=inherit;" vertex="1">
+          <mxGeometry height="20" width="231" y="60" as="geometry" />
+        </mxCell>
+        <mxCell id="P125q-w5StolGaf0o1yt-301" parent="P125q-w5StolGaf0o1yt-299" style="text;fontSize=16;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=12;spacingRight=12;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;fontFamily=Trebuchet MS,Verdana,Arial,sans-serif;fontColor=light-dark(#333333,#cccccc);" value="-Main(args: string[]) void" vertex="1">
+          <mxGeometry height="24" width="231" y="80" as="geometry" />
+        </mxCell>
+        <UserObject label="&lt;b&gt;NiceCute&lt;/b&gt;" mermaidId="n:NiceCute" mermaidBaseStyle="swimlane;html=1;fontStyle=0;fontSize=16;align=center;verticalAlign=middle;horizontal=1;childLayout=stackLayout;startSize=48;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=0;marginTop=12;marginBottom=12;stackSpacing=0;swimlaneFillColor=light-dark(#ECECFF,#1f2020);whiteSpace=wrap;fillColor=light-dark(#ECECFF,#1f2020);strokeColor=light-dark(#9370DB,#cccccc);fontColor=light-dark(#333333,#cccccc);fontFamily=Trebuchet MS,Verdana,Arial,sans-serif;" mermaidBaseValue="&lt;b&gt;NiceCute&lt;/b&gt;" id="P125q-w5StolGaf0o1yt-302">
+          <mxCell parent="P125q-w5StolGaf0o1yt-298" style="swimlane;html=1;fontStyle=0;fontSize=16;align=center;verticalAlign=middle;horizontal=1;childLayout=stackLayout;startSize=48;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=0;marginTop=12;marginBottom=12;stackSpacing=0;swimlaneFillColor=light-dark(#ECECFF,#1f2020);whiteSpace=wrap;fillColor=light-dark(#ECECFF,#1f2020);strokeColor=light-dark(#9370DB,#cccccc);fontColor=light-dark(#333333,#cccccc);fontFamily=Trebuchet MS,Verdana,Arial,sans-serif;" vertex="1">
+            <mxGeometry height="260" width="412" x="382" y="2310" as="geometry" />
+          </mxCell>
+        </UserObject>
+        <mxCell id="P125q-w5StolGaf0o1yt-303" parent="P125q-w5StolGaf0o1yt-302" style="text;fontSize=16;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=12;spacingRight=12;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;fontFamily=Trebuchet MS,Verdana,Arial,sans-serif;fontColor=light-dark(#333333,#cccccc);" value="-Center : PokemonCenter" vertex="1">
+          <mxGeometry height="24" width="412" y="60" as="geometry" />
+        </mxCell>
+        <mxCell id="P125q-w5StolGaf0o1yt-304" parent="P125q-w5StolGaf0o1yt-302" style="text;fontSize=16;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=12;spacingRight=12;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;fontFamily=Trebuchet MS,Verdana,Arial,sans-serif;fontColor=light-dark(#333333,#cccccc);" value="-Arena : Arena" vertex="1">
+          <mxGeometry height="24" width="412" y="84" as="geometry" />
+        </mxCell>
+        <mxCell id="P125q-w5StolGaf0o1yt-305" parent="P125q-w5StolGaf0o1yt-302" style="line;strokeWidth=1;fillColor=none;spacingLeft=3;spacingRight=3;rotatable=0;points=[];strokeColor=inherit;" vertex="1">
+          <mxGeometry height="20" width="412" y="108" as="geometry" />
+        </mxCell>
+        <mxCell id="P125q-w5StolGaf0o1yt-306" parent="P125q-w5StolGaf0o1yt-302" style="text;fontSize=16;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=12;spacingRight=12;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;fontFamily=Trebuchet MS,Verdana,Arial,sans-serif;fontColor=light-dark(#333333,#cccccc);" value="+NiceCute(center: PokemonCenter, arena: Arena)" vertex="1">
+          <mxGeometry height="24" width="412" y="128" as="geometry" />
+        </mxCell>
+        <mxCell id="P125q-w5StolGaf0o1yt-307" parent="P125q-w5StolGaf0o1yt-302" style="text;fontSize=16;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=12;spacingRight=12;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;fontFamily=Trebuchet MS,Verdana,Arial,sans-serif;fontColor=light-dark(#333333,#cccccc);" value="+Start() void" vertex="1">
+          <mxGeometry height="24" width="412" y="152" as="geometry" />
+        </mxCell>
+        <mxCell id="P125q-w5StolGaf0o1yt-308" parent="P125q-w5StolGaf0o1yt-302" style="text;fontSize=16;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=12;spacingRight=12;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;fontFamily=Trebuchet MS,Verdana,Arial,sans-serif;fontColor=light-dark(#333333,#cccccc);" value="-SelectTrainer() Trainer" vertex="1">
+          <mxGeometry height="24" width="412" y="176" as="geometry" />
+        </mxCell>
+        <mxCell id="P125q-w5StolGaf0o1yt-309" parent="P125q-w5StolGaf0o1yt-302" style="text;fontSize=16;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=12;spacingRight=12;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;fontFamily=Trebuchet MS,Verdana,Arial,sans-serif;fontColor=light-dark(#333333,#cccccc);" value="-ShowActionMenu(trainer: Trainer) void" vertex="1">
+          <mxGeometry height="24" width="412" y="200" as="geometry" />
+        </mxCell>
+        <mxCell id="P125q-w5StolGaf0o1yt-310" parent="P125q-w5StolGaf0o1yt-302" style="text;fontSize=16;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=12;spacingRight=12;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;fontFamily=Trebuchet MS,Verdana,Arial,sans-serif;fontColor=light-dark(#333333,#cccccc);" value="-DrawBanner() void" vertex="1">
+          <mxGeometry height="24" width="412" y="224" as="geometry" />
+        </mxCell>
+        <UserObject label="«static»&lt;br&gt;&lt;b&gt;ConsoleUI&lt;/b&gt;" mermaidId="n:ConsoleUI" mermaidBaseStyle="swimlane;html=1;fontStyle=0;fontSize=16;align=center;verticalAlign=middle;horizontal=1;childLayout=stackLayout;startSize=72;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=0;marginTop=12;marginBottom=12;stackSpacing=0;swimlaneFillColor=light-dark(#ECECFF,#1f2020);whiteSpace=wrap;fillColor=light-dark(#ECECFF,#1f2020);strokeColor=light-dark(#9370DB,#cccccc);fontColor=light-dark(#333333,#cccccc);fontFamily=Trebuchet MS,Verdana,Arial,sans-serif;" mermaidBaseValue="«static»&lt;br&gt;&lt;b&gt;ConsoleUI&lt;/b&gt;" id="P125q-w5StolGaf0o1yt-311">
+          <mxCell parent="P125q-w5StolGaf0o1yt-298" style="swimlane;html=1;fontStyle=0;fontSize=16;align=center;verticalAlign=middle;horizontal=1;childLayout=stackLayout;startSize=72;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=0;marginTop=12;marginBottom=12;stackSpacing=0;swimlaneFillColor=light-dark(#ECECFF,#1f2020);whiteSpace=wrap;fillColor=light-dark(#ECECFF,#1f2020);strokeColor=light-dark(#9370DB,#cccccc);fontColor=light-dark(#333333,#cccccc);fontFamily=Trebuchet MS,Verdana,Arial,sans-serif;" vertex="1">
+            <mxGeometry height="212" width="865" x="1724" y="1650" as="geometry" />
+          </mxCell>
+        </UserObject>
+        <mxCell id="P125q-w5StolGaf0o1yt-312" parent="P125q-w5StolGaf0o1yt-311" style="line;strokeWidth=1;fillColor=none;spacingLeft=3;spacingRight=3;rotatable=0;points=[];strokeColor=inherit;" vertex="1">
+          <mxGeometry height="20" width="865" y="84" as="geometry" />
+        </mxCell>
+        <mxCell id="P125q-w5StolGaf0o1yt-313" parent="P125q-w5StolGaf0o1yt-311" style="text;fontSize=16;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=12;spacingRight=12;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;fontFamily=Trebuchet MS,Verdana,Arial,sans-serif;fontColor=light-dark(#333333,#cccccc);" value="+WriteCentered(text: string) void" vertex="1">
+          <mxGeometry height="24" width="865" y="104" as="geometry" />
+        </mxCell>
+        <mxCell id="P125q-w5StolGaf0o1yt-314" parent="P125q-w5StolGaf0o1yt-311" style="text;fontSize=16;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=12;spacingRight=12;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;fontFamily=Trebuchet MS,Verdana,Arial,sans-serif;fontColor=light-dark(#333333,#cccccc);" value="+WriteCenteredHighlighted(text: string, selected: bool, boxWidth: int) void" vertex="1">
+          <mxGeometry height="24" width="865" y="128" as="geometry" />
+        </mxCell>
+        <mxCell id="P125q-w5StolGaf0o1yt-315" parent="P125q-w5StolGaf0o1yt-311" style="text;fontSize=16;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=12;spacingRight=12;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;fontFamily=Trebuchet MS,Verdana,Arial,sans-serif;fontColor=light-dark(#333333,#cccccc);" value="+DrawFrame(title: string, lines: IEnumerable&lt;string&gt;, borderColor: ConsoleColor, titleColor: ConsoleColor) void" vertex="1">
+          <mxGeometry height="24" width="865" y="152" as="geometry" />
+        </mxCell>
+        <mxCell id="P125q-w5StolGaf0o1yt-316" parent="P125q-w5StolGaf0o1yt-311" style="text;fontSize=16;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=12;spacingRight=12;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;fontFamily=Trebuchet MS,Verdana,Arial,sans-serif;fontColor=light-dark(#333333,#cccccc);" value="+WriteMenuFrame(title: string, items: IEnumerable&lt;string&gt;, selectedIndex: int, borderColor: ConsoleColor) void" vertex="1">
+          <mxGeometry height="24" width="865" y="176" as="geometry" />
+        </mxCell>
+        <UserObject label="&lt;b&gt;Arena&lt;/b&gt;" mermaidId="n:Arena" mermaidBaseStyle="swimlane;html=1;fontStyle=0;fontSize=16;align=center;verticalAlign=middle;horizontal=1;childLayout=stackLayout;startSize=48;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=0;marginTop=12;marginBottom=12;stackSpacing=0;swimlaneFillColor=light-dark(#ECECFF,#1f2020);whiteSpace=wrap;fillColor=light-dark(#ECECFF,#1f2020);strokeColor=light-dark(#9370DB,#cccccc);fontColor=light-dark(#333333,#cccccc);fontFamily=Trebuchet MS,Verdana,Arial,sans-serif;" mermaidBaseValue="&lt;b&gt;Arena&lt;/b&gt;" id="P125q-w5StolGaf0o1yt-317">
+          <mxCell parent="P125q-w5StolGaf0o1yt-298" style="swimlane;html=1;fontStyle=0;fontSize=16;align=center;verticalAlign=middle;horizontal=1;childLayout=stackLayout;startSize=48;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=0;marginTop=12;marginBottom=12;stackSpacing=0;swimlaneFillColor=light-dark(#ECECFF,#1f2020);whiteSpace=wrap;fillColor=light-dark(#ECECFF,#1f2020);strokeColor=light-dark(#9370DB,#cccccc);fontColor=light-dark(#333333,#cccccc);fontFamily=Trebuchet MS,Verdana,Arial,sans-serif;" vertex="1">
+            <mxGeometry height="308" width="363" x="892" y="2444.67" as="geometry" />
+          </mxCell>
+        </UserObject>
+        <mxCell id="P125q-w5StolGaf0o1yt-318" parent="P125q-w5StolGaf0o1yt-317" style="text;fontSize=16;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=12;spacingRight=12;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;fontFamily=Trebuchet MS,Verdana,Arial,sans-serif;fontColor=light-dark(#333333,#cccccc);" value="+Center : PokemonCenter" vertex="1">
+          <mxGeometry height="24" width="363" y="60" as="geometry" />
+        </mxCell>
+        <mxCell id="P125q-w5StolGaf0o1yt-319" parent="P125q-w5StolGaf0o1yt-317" style="text;fontSize=16;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=12;spacingRight=12;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;fontFamily=Trebuchet MS,Verdana,Arial,sans-serif;fontColor=light-dark(#333333,#cccccc);" value="+RocketTeam : TeamWH" vertex="1">
+          <mxGeometry height="24" width="363" y="84" as="geometry" />
+        </mxCell>
+        <mxCell id="P125q-w5StolGaf0o1yt-320" parent="P125q-w5StolGaf0o1yt-317" style="text;fontSize=16;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=12;spacingRight=12;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;fontFamily=Trebuchet MS,Verdana,Arial,sans-serif;fontColor=light-dark(#333333,#cccccc);" value="-RocketGuard : Pokemon" vertex="1">
+          <mxGeometry height="24" width="363" y="108" as="geometry" />
+        </mxCell>
+        <mxCell id="P125q-w5StolGaf0o1yt-321" parent="P125q-w5StolGaf0o1yt-317" style="text;fontSize=16;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=12;spacingRight=12;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;fontFamily=Trebuchet MS,Verdana,Arial,sans-serif;fontColor=light-dark(#333333,#cccccc);" value="-random : Random" vertex="1">
+          <mxGeometry height="24" width="363" y="132" as="geometry" />
+        </mxCell>
+        <mxCell id="P125q-w5StolGaf0o1yt-322" parent="P125q-w5StolGaf0o1yt-317" style="line;strokeWidth=1;fillColor=none;spacingLeft=3;spacingRight=3;rotatable=0;points=[];strokeColor=inherit;" vertex="1">
+          <mxGeometry height="20" width="363" y="156" as="geometry" />
+        </mxCell>
+        <mxCell id="P125q-w5StolGaf0o1yt-323" parent="P125q-w5StolGaf0o1yt-317" style="text;fontSize=16;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=12;spacingRight=12;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;fontFamily=Trebuchet MS,Verdana,Arial,sans-serif;fontColor=light-dark(#333333,#cccccc);" value="+Arena()" vertex="1">
+          <mxGeometry height="24" width="363" y="176" as="geometry" />
+        </mxCell>
+        <mxCell id="P125q-w5StolGaf0o1yt-324" parent="P125q-w5StolGaf0o1yt-317" style="text;fontSize=16;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=12;spacingRight=12;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;fontFamily=Trebuchet MS,Verdana,Arial,sans-serif;fontColor=light-dark(#333333,#cccccc);" value="-ReadNumber(min: int, max: int) int" vertex="1">
+          <mxGeometry height="24" width="363" y="200" as="geometry" />
+        </mxCell>
+        <mxCell id="P125q-w5StolGaf0o1yt-325" parent="P125q-w5StolGaf0o1yt-317" style="text;fontSize=16;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=12;spacingRight=12;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;fontFamily=Trebuchet MS,Verdana,Arial,sans-serif;fontColor=light-dark(#333333,#cccccc);" value="+StartBattle(trainer: Trainer) void" vertex="1">
+          <mxGeometry height="24" width="363" y="224" as="geometry" />
+        </mxCell>
+        <mxCell id="P125q-w5StolGaf0o1yt-326" parent="P125q-w5StolGaf0o1yt-317" style="text;fontSize=16;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=12;spacingRight=12;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;fontFamily=Trebuchet MS,Verdana,Arial,sans-serif;fontColor=light-dark(#333333,#cccccc);" value="+RocketEncounter(trainer: Trainer) void" vertex="1">
+          <mxGeometry height="24" width="363" y="248" as="geometry" />
+        </mxCell>
+        <mxCell id="P125q-w5StolGaf0o1yt-327" parent="P125q-w5StolGaf0o1yt-317" style="text;fontSize=16;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=12;spacingRight=12;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;fontFamily=Trebuchet MS,Verdana,Arial,sans-serif;fontColor=light-dark(#333333,#cccccc);" value="-Fight(me: Pokemon, enemy: Pokemon) void" vertex="1">
+          <mxGeometry height="24" width="363" y="272" as="geometry" />
+        </mxCell>
+        <UserObject label="&lt;b&gt;PokemonCenter&lt;/b&gt;" mermaidId="n:PokemonCenter" mermaidBaseStyle="swimlane;html=1;fontStyle=0;fontSize=16;align=center;verticalAlign=middle;horizontal=1;childLayout=stackLayout;startSize=48;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=0;marginTop=12;marginBottom=12;stackSpacing=0;swimlaneFillColor=light-dark(#ECECFF,#1f2020);whiteSpace=wrap;fillColor=light-dark(#ECECFF,#1f2020);strokeColor=light-dark(#9370DB,#cccccc);fontColor=light-dark(#333333,#cccccc);fontFamily=Trebuchet MS,Verdana,Arial,sans-serif;" mermaidBaseValue="&lt;b&gt;PokemonCenter&lt;/b&gt;" id="P125q-w5StolGaf0o1yt-328">
+          <mxCell parent="P125q-w5StolGaf0o1yt-298" style="swimlane;html=1;fontStyle=0;fontSize=16;align=center;verticalAlign=middle;horizontal=1;childLayout=stackLayout;startSize=48;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=0;marginTop=12;marginBottom=12;stackSpacing=0;swimlaneFillColor=light-dark(#ECECFF,#1f2020);whiteSpace=wrap;fillColor=light-dark(#ECECFF,#1f2020);strokeColor=light-dark(#9370DB,#cccccc);fontColor=light-dark(#333333,#cccccc);fontFamily=Trebuchet MS,Verdana,Arial,sans-serif;" vertex="1">
+            <mxGeometry height="452" width="491" x="1359" y="2246" as="geometry" />
+          </mxCell>
+        </UserObject>
+        <mxCell id="P125q-w5StolGaf0o1yt-329" parent="P125q-w5StolGaf0o1yt-328" style="text;fontSize=16;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=12;spacingRight=12;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;fontFamily=Trebuchet MS,Verdana,Arial,sans-serif;fontColor=light-dark(#333333,#cccccc);" value="-pokemonList : List&lt;Pokemon&gt;" vertex="1">
+          <mxGeometry height="24" width="491" y="60" as="geometry" />
+        </mxCell>
+        <mxCell id="P125q-w5StolGaf0o1yt-330" parent="P125q-w5StolGaf0o1yt-328" style="text;fontSize=16;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=12;spacingRight=12;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;fontFamily=Trebuchet MS,Verdana,Arial,sans-serif;fontColor=light-dark(#333333,#cccccc);" value="-trainerList : List&lt;Trainer&gt;" vertex="1">
+          <mxGeometry height="24" width="491" y="84" as="geometry" />
+        </mxCell>
+        <mxCell id="P125q-w5StolGaf0o1yt-331" parent="P125q-w5StolGaf0o1yt-328" style="line;strokeWidth=1;fillColor=none;spacingLeft=3;spacingRight=3;rotatable=0;points=[];strokeColor=inherit;" vertex="1">
+          <mxGeometry height="20" width="491" y="108" as="geometry" />
+        </mxCell>
+        <mxCell id="P125q-w5StolGaf0o1yt-332" parent="P125q-w5StolGaf0o1yt-328" style="text;fontSize=16;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=12;spacingRight=12;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;fontFamily=Trebuchet MS,Verdana,Arial,sans-serif;fontColor=light-dark(#333333,#cccccc);" value="+PokemonCenter()" vertex="1">
+          <mxGeometry height="24" width="491" y="128" as="geometry" />
+        </mxCell>
+        <mxCell id="P125q-w5StolGaf0o1yt-333" parent="P125q-w5StolGaf0o1yt-328" style="text;fontSize=16;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=12;spacingRight=12;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;fontFamily=Trebuchet MS,Verdana,Arial,sans-serif;fontColor=light-dark(#333333,#cccccc);" value="+GetAllPokeon() List&lt;Pokemon&gt;" vertex="1">
+          <mxGeometry height="24" width="491" y="152" as="geometry" />
+        </mxCell>
+        <mxCell id="P125q-w5StolGaf0o1yt-334" parent="P125q-w5StolGaf0o1yt-328" style="text;fontSize=16;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=12;spacingRight=12;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;fontFamily=Trebuchet MS,Verdana,Arial,sans-serif;fontColor=light-dark(#333333,#cccccc);" value="+GetAllTrainers() List&lt;Trainer&gt;" vertex="1">
+          <mxGeometry height="24" width="491" y="176" as="geometry" />
+        </mxCell>
+        <mxCell id="P125q-w5StolGaf0o1yt-335" parent="P125q-w5StolGaf0o1yt-328" style="text;fontSize=16;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=12;spacingRight=12;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;fontFamily=Trebuchet MS,Verdana,Arial,sans-serif;fontColor=light-dark(#333333,#cccccc);" value="+AddPokemon(pokemon: Pokemon) void" vertex="1">
+          <mxGeometry height="24" width="491" y="200" as="geometry" />
+        </mxCell>
+        <mxCell id="P125q-w5StolGaf0o1yt-336" parent="P125q-w5StolGaf0o1yt-328" style="text;fontSize=16;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=12;spacingRight=12;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;fontFamily=Trebuchet MS,Verdana,Arial,sans-serif;fontColor=light-dark(#333333,#cccccc);" value="+AddTrainer(trainer: Trainer) void" vertex="1">
+          <mxGeometry height="24" width="491" y="224" as="geometry" />
+        </mxCell>
+        <mxCell id="P125q-w5StolGaf0o1yt-337" parent="P125q-w5StolGaf0o1yt-328" style="text;fontSize=16;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=12;spacingRight=12;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;fontFamily=Trebuchet MS,Verdana,Arial,sans-serif;fontColor=light-dark(#333333,#cccccc);" value="+ShowAllPokemon() void" vertex="1">
+          <mxGeometry height="24" width="491" y="248" as="geometry" />
+        </mxCell>
+        <mxCell id="P125q-w5StolGaf0o1yt-338" parent="P125q-w5StolGaf0o1yt-328" style="text;fontSize=16;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=12;spacingRight=12;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;fontFamily=Trebuchet MS,Verdana,Arial,sans-serif;fontColor=light-dark(#333333,#cccccc);" value="+ShowAllTrainers() void" vertex="1">
+          <mxGeometry height="24" width="491" y="272" as="geometry" />
+        </mxCell>
+        <mxCell id="P125q-w5StolGaf0o1yt-339" parent="P125q-w5StolGaf0o1yt-328" style="text;fontSize=16;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=12;spacingRight=12;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;fontFamily=Trebuchet MS,Verdana,Arial,sans-serif;fontColor=light-dark(#333333,#cccccc);" value="+SearchPokemon(name: string) Pokemon" vertex="1">
+          <mxGeometry height="24" width="491" y="296" as="geometry" />
+        </mxCell>
+        <mxCell id="P125q-w5StolGaf0o1yt-340" parent="P125q-w5StolGaf0o1yt-328" style="text;fontSize=16;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=12;spacingRight=12;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;fontFamily=Trebuchet MS,Verdana,Arial,sans-serif;fontColor=light-dark(#333333,#cccccc);" value="+AssignPokeon(pokemon: Pokemon, trainer: Trainer) void" vertex="1">
+          <mxGeometry height="24" width="491" y="320" as="geometry" />
+        </mxCell>
+        <mxCell id="P125q-w5StolGaf0o1yt-341" parent="P125q-w5StolGaf0o1yt-328" style="text;fontSize=16;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=12;spacingRight=12;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;fontFamily=Trebuchet MS,Verdana,Arial,sans-serif;fontColor=light-dark(#333333,#cccccc);" value="+GetBehavior(pokemon: Pokemon) void" vertex="1">
+          <mxGeometry height="24" width="491" y="344" as="geometry" />
+        </mxCell>
+        <mxCell id="P125q-w5StolGaf0o1yt-342" parent="P125q-w5StolGaf0o1yt-328" style="text;fontSize=16;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=12;spacingRight=12;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;fontFamily=Trebuchet MS,Verdana,Arial,sans-serif;fontColor=light-dark(#333333,#cccccc);" value="+HealPokemon(pokemon: Pokemon) void" vertex="1">
+          <mxGeometry height="24" width="491" y="368" as="geometry" />
+        </mxCell>
+        <mxCell id="P125q-w5StolGaf0o1yt-343" parent="P125q-w5StolGaf0o1yt-328" style="text;fontSize=16;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=12;spacingRight=12;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;fontFamily=Trebuchet MS,Verdana,Arial,sans-serif;fontColor=light-dark(#333333,#cccccc);" value="+HealPokemon(name: string) void" vertex="1">
+          <mxGeometry height="24" width="491" y="392" as="geometry" />
+        </mxCell>
+        <mxCell id="P125q-w5StolGaf0o1yt-344" parent="P125q-w5StolGaf0o1yt-328" style="text;fontSize=16;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=12;spacingRight=12;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;fontFamily=Trebuchet MS,Verdana,Arial,sans-serif;fontColor=light-dark(#333333,#cccccc);" value="+RemovePokemon(pokemon: Pokemon) bool" vertex="1">
+          <mxGeometry height="24" width="491" y="416" as="geometry" />
+        </mxCell>
+        <UserObject label="&lt;b&gt;Trainer&lt;/b&gt;" mermaidId="n:Trainer" mermaidBaseStyle="swimlane;html=1;fontStyle=0;fontSize=16;align=center;verticalAlign=middle;horizontal=1;childLayout=stackLayout;startSize=48;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=0;marginTop=12;marginBottom=12;stackSpacing=0;swimlaneFillColor=light-dark(#ECECFF,#1f2020);whiteSpace=wrap;fillColor=light-dark(#ECECFF,#1f2020);strokeColor=light-dark(#9370DB,#cccccc);fontColor=light-dark(#333333,#cccccc);fontFamily=Trebuchet MS,Verdana,Arial,sans-serif;" mermaidBaseValue="&lt;b&gt;Trainer&lt;/b&gt;" id="P125q-w5StolGaf0o1yt-345">
+          <mxCell parent="P125q-w5StolGaf0o1yt-298" style="swimlane;html=1;fontStyle=0;fontSize=16;align=center;verticalAlign=middle;horizontal=1;childLayout=stackLayout;startSize=48;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=0;marginTop=12;marginBottom=12;stackSpacing=0;swimlaneFillColor=light-dark(#ECECFF,#1f2020);whiteSpace=wrap;fillColor=light-dark(#ECECFF,#1f2020);strokeColor=light-dark(#9370DB,#cccccc);fontColor=light-dark(#333333,#cccccc);fontFamily=Trebuchet MS,Verdana,Arial,sans-serif;" vertex="1">
+            <mxGeometry height="380" width="352" x="1980" y="2468.67" as="geometry" />
+          </mxCell>
+        </UserObject>
+        <mxCell id="P125q-w5StolGaf0o1yt-346" parent="P125q-w5StolGaf0o1yt-345" style="text;fontSize=16;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=12;spacingRight=12;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;fontFamily=Trebuchet MS,Verdana,Arial,sans-serif;fontColor=light-dark(#333333,#cccccc);" value="+Name : string" vertex="1">
+          <mxGeometry height="24" width="352" y="60" as="geometry" />
+        </mxCell>
+        <mxCell id="P125q-w5StolGaf0o1yt-347" parent="P125q-w5StolGaf0o1yt-345" style="text;fontSize=16;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=12;spacingRight=12;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;fontFamily=Trebuchet MS,Verdana,Arial,sans-serif;fontColor=light-dark(#333333,#cccccc);" value="+ass_poke : List&lt;Pokemon&gt;" vertex="1">
+          <mxGeometry height="24" width="352" y="84" as="geometry" />
+        </mxCell>
+        <mxCell id="P125q-w5StolGaf0o1yt-348" parent="P125q-w5StolGaf0o1yt-345" style="line;strokeWidth=1;fillColor=none;spacingLeft=3;spacingRight=3;rotatable=0;points=[];strokeColor=inherit;" vertex="1">
+          <mxGeometry height="20" width="352" y="108" as="geometry" />
+        </mxCell>
+        <mxCell id="P125q-w5StolGaf0o1yt-349" parent="P125q-w5StolGaf0o1yt-345" style="text;fontSize=16;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=12;spacingRight=12;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;fontFamily=Trebuchet MS,Verdana,Arial,sans-serif;fontColor=light-dark(#333333,#cccccc);" value="+Trainer(name: string)" vertex="1">
+          <mxGeometry height="24" width="352" y="128" as="geometry" />
+        </mxCell>
+        <mxCell id="P125q-w5StolGaf0o1yt-350" parent="P125q-w5StolGaf0o1yt-345" style="text;fontSize=16;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=12;spacingRight=12;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;fontFamily=Trebuchet MS,Verdana,Arial,sans-serif;fontColor=light-dark(#333333,#cccccc);" value="-ReadNumber(min: int, max: int) int" vertex="1">
+          <mxGeometry height="24" width="352" y="152" as="geometry" />
+        </mxCell>
+        <mxCell id="P125q-w5StolGaf0o1yt-351" parent="P125q-w5StolGaf0o1yt-345" style="text;fontSize=16;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=12;spacingRight=12;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;fontFamily=Trebuchet MS,Verdana,Arial,sans-serif;fontColor=light-dark(#333333,#cccccc);" value="+ChoosePokemonFromTeam() Pokemon" vertex="1">
+          <mxGeometry height="24" width="352" y="176" as="geometry" />
+        </mxCell>
+        <mxCell id="P125q-w5StolGaf0o1yt-352" parent="P125q-w5StolGaf0o1yt-345" style="text;fontSize=16;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=12;spacingRight=12;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;fontFamily=Trebuchet MS,Verdana,Arial,sans-serif;fontColor=light-dark(#333333,#cccccc);" value="+AssignPokemon(pokemon: Pokemon) void" vertex="1">
+          <mxGeometry height="24" width="352" y="200" as="geometry" />
+        </mxCell>
+        <mxCell id="P125q-w5StolGaf0o1yt-353" parent="P125q-w5StolGaf0o1yt-345" style="text;fontSize=16;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=12;spacingRight=12;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;fontFamily=Trebuchet MS,Verdana,Arial,sans-serif;fontColor=light-dark(#333333,#cccccc);" value="+ShowPokemon() void" vertex="1">
+          <mxGeometry height="24" width="352" y="224" as="geometry" />
+        </mxCell>
+        <mxCell id="P125q-w5StolGaf0o1yt-354" parent="P125q-w5StolGaf0o1yt-345" style="text;fontSize=16;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=12;spacingRight=12;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;fontFamily=Trebuchet MS,Verdana,Arial,sans-serif;fontColor=light-dark(#333333,#cccccc);" value="+HealPokemon(pokemon: Pokemon) void" vertex="1">
+          <mxGeometry height="24" width="352" y="248" as="geometry" />
+        </mxCell>
+        <mxCell id="P125q-w5StolGaf0o1yt-355" parent="P125q-w5StolGaf0o1yt-345" style="text;fontSize=16;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=12;spacingRight=12;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;fontFamily=Trebuchet MS,Verdana,Arial,sans-serif;fontColor=light-dark(#333333,#cccccc);" value="+HealPokemon(name: string) void" vertex="1">
+          <mxGeometry height="24" width="352" y="272" as="geometry" />
+        </mxCell>
+        <mxCell id="P125q-w5StolGaf0o1yt-356" parent="P125q-w5StolGaf0o1yt-345" style="text;fontSize=16;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=12;spacingRight=12;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;fontFamily=Trebuchet MS,Verdana,Arial,sans-serif;fontColor=light-dark(#333333,#cccccc);" value="+HealTeam() void" vertex="1">
+          <mxGeometry height="24" width="352" y="296" as="geometry" />
+        </mxCell>
+        <mxCell id="P125q-w5StolGaf0o1yt-357" parent="P125q-w5StolGaf0o1yt-345" style="text;fontSize=16;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=12;spacingRight=12;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;fontFamily=Trebuchet MS,Verdana,Arial,sans-serif;fontColor=light-dark(#333333,#cccccc);" value="+ClearTeam() void" vertex="1">
+          <mxGeometry height="24" width="352" y="320" as="geometry" />
+        </mxCell>
+        <mxCell id="P125q-w5StolGaf0o1yt-358" parent="P125q-w5StolGaf0o1yt-345" style="text;fontSize=16;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=12;spacingRight=12;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;fontFamily=Trebuchet MS,Verdana,Arial,sans-serif;fontColor=light-dark(#333333,#cccccc);" value="+HasPokemon() bool" vertex="1">
+          <mxGeometry height="24" width="352" y="344" as="geometry" />
+        </mxCell>
+        <UserObject label="&lt;b&gt;TeamWH&lt;/b&gt;" mermaidId="n:TeamWH" mermaidBaseStyle="swimlane;html=1;fontStyle=0;fontSize=16;align=center;verticalAlign=middle;horizontal=1;childLayout=stackLayout;startSize=48;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=0;marginTop=12;marginBottom=12;stackSpacing=0;swimlaneFillColor=light-dark(#ECECFF,#1f2020);whiteSpace=wrap;fillColor=light-dark(#ECECFF,#1f2020);strokeColor=light-dark(#9370DB,#cccccc);fontColor=light-dark(#333333,#cccccc);fontFamily=Trebuchet MS,Verdana,Arial,sans-serif;" mermaidBaseValue="&lt;b&gt;TeamWH&lt;/b&gt;" id="P125q-w5StolGaf0o1yt-359">
+          <mxCell parent="P125q-w5StolGaf0o1yt-298" style="swimlane;html=1;fontStyle=0;fontSize=16;align=center;verticalAlign=middle;horizontal=1;childLayout=stackLayout;startSize=48;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=0;marginTop=12;marginBottom=12;stackSpacing=0;swimlaneFillColor=light-dark(#ECECFF,#1f2020);whiteSpace=wrap;fillColor=light-dark(#ECECFF,#1f2020);strokeColor=light-dark(#9370DB,#cccccc);fontColor=light-dark(#333333,#cccccc);fontFamily=Trebuchet MS,Verdana,Arial,sans-serif;" vertex="1">
+            <mxGeometry height="212" width="315" x="2364" y="2717.33" as="geometry" />
+          </mxCell>
+        </UserObject>
+        <mxCell id="P125q-w5StolGaf0o1yt-360" parent="P125q-w5StolGaf0o1yt-359" style="text;fontSize=16;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=12;spacingRight=12;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;fontFamily=Trebuchet MS,Verdana,Arial,sans-serif;fontColor=light-dark(#333333,#cccccc);" value="-evilQuotes : string[]" vertex="1">
+          <mxGeometry height="24" width="315" y="60" as="geometry" />
+        </mxCell>
+        <mxCell id="P125q-w5StolGaf0o1yt-361" parent="P125q-w5StolGaf0o1yt-359" style="text;fontSize=16;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=12;spacingRight=12;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;fontFamily=Trebuchet MS,Verdana,Arial,sans-serif;fontColor=light-dark(#333333,#cccccc);" value="-rnd : Random" vertex="1">
+          <mxGeometry height="24" width="315" y="84" as="geometry" />
+        </mxCell>
+        <mxCell id="P125q-w5StolGaf0o1yt-362" parent="P125q-w5StolGaf0o1yt-359" style="line;strokeWidth=1;fillColor=none;spacingLeft=3;spacingRight=3;rotatable=0;points=[];strokeColor=inherit;" vertex="1">
+          <mxGeometry height="20" width="315" y="108" as="geometry" />
+        </mxCell>
+        <mxCell id="P125q-w5StolGaf0o1yt-363" parent="P125q-w5StolGaf0o1yt-359" style="text;fontSize=16;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=12;spacingRight=12;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;fontFamily=Trebuchet MS,Verdana,Arial,sans-serif;fontColor=light-dark(#333333,#cccccc);" value="+TeamWH(name: string)" vertex="1">
+          <mxGeometry height="24" width="315" y="128" as="geometry" />
+        </mxCell>
+        <mxCell id="P125q-w5StolGaf0o1yt-364" parent="P125q-w5StolGaf0o1yt-359" style="text;fontSize=16;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=12;spacingRight=12;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;fontFamily=Trebuchet MS,Verdana,Arial,sans-serif;fontColor=light-dark(#333333,#cccccc);" value="+StealPokemon(victim: Trainer) void" vertex="1">
+          <mxGeometry height="24" width="315" y="152" as="geometry" />
+        </mxCell>
+        <mxCell id="P125q-w5StolGaf0o1yt-365" parent="P125q-w5StolGaf0o1yt-359" style="text;fontSize=16;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=12;spacingRight=12;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;fontFamily=Trebuchet MS,Verdana,Arial,sans-serif;fontColor=light-dark(#333333,#cccccc);" value="+AskToBecomeRealTrainer() void" vertex="1">
+          <mxGeometry height="24" width="315" y="176" as="geometry" />
+        </mxCell>
+        <UserObject label="«abstract»&lt;br&gt;&lt;b&gt;Pokemon&lt;/b&gt;" mermaidId="n:Pokemon" mermaidBaseStyle="swimlane;html=1;fontStyle=0;fontSize=16;align=center;verticalAlign=middle;horizontal=1;childLayout=stackLayout;startSize=72;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=0;marginTop=12;marginBottom=12;stackSpacing=0;swimlaneFillColor=light-dark(#ECECFF,#1f2020);whiteSpace=wrap;fillColor=light-dark(#ECECFF,#1f2020);strokeColor=light-dark(#9370DB,#cccccc);fontColor=light-dark(#333333,#cccccc);fontFamily=Trebuchet MS,Verdana,Arial,sans-serif;" mermaidBaseValue="«abstract»&lt;br&gt;&lt;b&gt;Pokemon&lt;/b&gt;" id="P125q-w5StolGaf0o1yt-366">
+          <mxCell parent="P125q-w5StolGaf0o1yt-298" style="swimlane;html=1;fontStyle=0;fontSize=16;align=center;verticalAlign=middle;horizontal=1;childLayout=stackLayout;startSize=72;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=0;marginTop=12;marginBottom=12;stackSpacing=0;swimlaneFillColor=light-dark(#ECECFF,#1f2020);whiteSpace=wrap;fillColor=light-dark(#ECECFF,#1f2020);strokeColor=light-dark(#9370DB,#cccccc);fontColor=light-dark(#333333,#cccccc);fontFamily=Trebuchet MS,Verdana,Arial,sans-serif;" vertex="1">
+            <mxGeometry height="596" width="722" x="2709" y="2198" as="geometry" />
+          </mxCell>
+        </UserObject>
+        <mxCell id="P125q-w5StolGaf0o1yt-367" parent="P125q-w5StolGaf0o1yt-366" style="text;fontSize=16;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=12;spacingRight=12;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;fontFamily=Trebuchet MS,Verdana,Arial,sans-serif;fontColor=light-dark(#333333,#cccccc);" value="+Name : string" vertex="1">
+          <mxGeometry height="24" width="722" y="84" as="geometry" />
+        </mxCell>
+        <mxCell id="P125q-w5StolGaf0o1yt-368" parent="P125q-w5StolGaf0o1yt-366" style="text;fontSize=16;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=12;spacingRight=12;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;fontFamily=Trebuchet MS,Verdana,Arial,sans-serif;fontColor=light-dark(#333333,#cccccc);" value="#Trainer : string" vertex="1">
+          <mxGeometry height="24" width="722" y="108" as="geometry" />
+        </mxCell>
+        <mxCell id="P125q-w5StolGaf0o1yt-369" parent="P125q-w5StolGaf0o1yt-366" style="text;fontSize=16;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=12;spacingRight=12;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;fontFamily=Trebuchet MS,Verdana,Arial,sans-serif;fontColor=light-dark(#333333,#cccccc);" value="#Level : int" vertex="1">
+          <mxGeometry height="24" width="722" y="132" as="geometry" />
+        </mxCell>
+        <mxCell id="P125q-w5StolGaf0o1yt-370" parent="P125q-w5StolGaf0o1yt-366" style="text;fontSize=16;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=12;spacingRight=12;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;fontFamily=Trebuchet MS,Verdana,Arial,sans-serif;fontColor=light-dark(#333333,#cccccc);" value="#HP : int" vertex="1">
+          <mxGeometry height="24" width="722" y="156" as="geometry" />
+        </mxCell>
+        <mxCell id="P125q-w5StolGaf0o1yt-371" parent="P125q-w5StolGaf0o1yt-366" style="text;fontSize=16;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=12;spacingRight=12;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;fontFamily=Trebuchet MS,Verdana,Arial,sans-serif;fontColor=light-dark(#333333,#cccccc);" value="#MaxHP : int" vertex="1">
+          <mxGeometry height="24" width="722" y="180" as="geometry" />
+        </mxCell>
+        <mxCell id="P125q-w5StolGaf0o1yt-372" parent="P125q-w5StolGaf0o1yt-366" style="text;fontSize=16;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=12;spacingRight=12;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;fontFamily=Trebuchet MS,Verdana,Arial,sans-serif;fontColor=light-dark(#333333,#cccccc);" value="#AttackDamage : int" vertex="1">
+          <mxGeometry height="24" width="722" y="204" as="geometry" />
+        </mxCell>
+        <mxCell id="P125q-w5StolGaf0o1yt-373" parent="P125q-w5StolGaf0o1yt-366" style="text;fontSize=16;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=12;spacingRight=12;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;fontFamily=Trebuchet MS,Verdana,Arial,sans-serif;fontColor=light-dark(#333333,#cccccc);" value="#Defense : int" vertex="1">
+          <mxGeometry height="24" width="722" y="228" as="geometry" />
+        </mxCell>
+        <mxCell id="P125q-w5StolGaf0o1yt-374" parent="P125q-w5StolGaf0o1yt-366" style="text;fontSize=16;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=12;spacingRight=12;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;fontFamily=Trebuchet MS,Verdana,Arial,sans-serif;fontColor=light-dark(#333333,#cccccc);" value="+attacks : List&lt;Attack&gt;" vertex="1">
+          <mxGeometry height="24" width="722" y="252" as="geometry" />
+        </mxCell>
+        <mxCell id="P125q-w5StolGaf0o1yt-375" parent="P125q-w5StolGaf0o1yt-366" style="line;strokeWidth=1;fillColor=none;spacingLeft=3;spacingRight=3;rotatable=0;points=[];strokeColor=inherit;" vertex="1">
+          <mxGeometry height="20" width="722" y="276" as="geometry" />
+        </mxCell>
+        <mxCell id="P125q-w5StolGaf0o1yt-376" parent="P125q-w5StolGaf0o1yt-366" style="text;fontSize=16;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=12;spacingRight=12;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;fontFamily=Trebuchet MS,Verdana,Arial,sans-serif;fontColor=light-dark(#333333,#cccccc);" value="#Pokemon(name: string, trainer: string, level: int, hp: int, attackDamage: int, defense: int)" vertex="1">
+          <mxGeometry height="24" width="722" y="296" as="geometry" />
+        </mxCell>
+        <mxCell id="P125q-w5StolGaf0o1yt-377" parent="P125q-w5StolGaf0o1yt-366" style="text;fontSize=16;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=12;spacingRight=12;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;fontFamily=Trebuchet MS,Verdana,Arial,sans-serif;fontColor=light-dark(#333333,#cccccc);fontStyle=2;" value="+Behavior() string" vertex="1">
+          <mxGeometry height="24" width="722" y="320" as="geometry" />
+        </mxCell>
+        <mxCell id="P125q-w5StolGaf0o1yt-378" parent="P125q-w5StolGaf0o1yt-366" style="text;fontSize=16;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=12;spacingRight=12;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;fontFamily=Trebuchet MS,Verdana,Arial,sans-serif;fontColor=light-dark(#333333,#cccccc);" value="+SetTrainer(trainer: string) void" vertex="1">
+          <mxGeometry height="24" width="722" y="344" as="geometry" />
+        </mxCell>
+        <mxCell id="P125q-w5StolGaf0o1yt-379" parent="P125q-w5StolGaf0o1yt-366" style="text;fontSize=16;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=12;spacingRight=12;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;fontFamily=Trebuchet MS,Verdana,Arial,sans-serif;fontColor=light-dark(#333333,#cccccc);" value="+GetCurrentHp() int" vertex="1">
+          <mxGeometry height="24" width="722" y="368" as="geometry" />
+        </mxCell>
+        <mxCell id="P125q-w5StolGaf0o1yt-380" parent="P125q-w5StolGaf0o1yt-366" style="text;fontSize=16;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=12;spacingRight=12;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;fontFamily=Trebuchet MS,Verdana,Arial,sans-serif;fontColor=light-dark(#333333,#cccccc);" value="+GetMaxHp() int" vertex="1">
+          <mxGeometry height="24" width="722" y="392" as="geometry" />
+        </mxCell>
+        <mxCell id="P125q-w5StolGaf0o1yt-381" parent="P125q-w5StolGaf0o1yt-366" style="text;fontSize=16;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=12;spacingRight=12;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;fontFamily=Trebuchet MS,Verdana,Arial,sans-serif;fontColor=light-dark(#333333,#cccccc);" value="+GetBattleStatus() string" vertex="1">
+          <mxGeometry height="24" width="722" y="416" as="geometry" />
+        </mxCell>
+        <mxCell id="P125q-w5StolGaf0o1yt-382" parent="P125q-w5StolGaf0o1yt-366" style="text;fontSize=16;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=12;spacingRight=12;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;fontFamily=Trebuchet MS,Verdana,Arial,sans-serif;fontColor=light-dark(#333333,#cccccc);" value="+AddAttack(name: string, damage: int) void" vertex="1">
+          <mxGeometry height="24" width="722" y="440" as="geometry" />
+        </mxCell>
+        <mxCell id="P125q-w5StolGaf0o1yt-383" parent="P125q-w5StolGaf0o1yt-366" style="text;fontSize=16;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=12;spacingRight=12;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;fontFamily=Trebuchet MS,Verdana,Arial,sans-serif;fontColor=light-dark(#333333,#cccccc);" value="+Attack(p2: Pokemon, attack: Attack) int" vertex="1">
+          <mxGeometry height="24" width="722" y="464" as="geometry" />
+        </mxCell>
+        <mxCell id="P125q-w5StolGaf0o1yt-384" parent="P125q-w5StolGaf0o1yt-366" style="text;fontSize=16;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=12;spacingRight=12;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;fontFamily=Trebuchet MS,Verdana,Arial,sans-serif;fontColor=light-dark(#333333,#cccccc);" value="+TakeDamage(damage: int) void" vertex="1">
+          <mxGeometry height="24" width="722" y="488" as="geometry" />
+        </mxCell>
+        <mxCell id="P125q-w5StolGaf0o1yt-385" parent="P125q-w5StolGaf0o1yt-366" style="text;fontSize=16;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=12;spacingRight=12;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;fontFamily=Trebuchet MS,Verdana,Arial,sans-serif;fontColor=light-dark(#333333,#cccccc);" value="+IsDefeated() bool" vertex="1">
+          <mxGeometry height="24" width="722" y="512" as="geometry" />
+        </mxCell>
+        <mxCell id="P125q-w5StolGaf0o1yt-386" parent="P125q-w5StolGaf0o1yt-366" style="text;fontSize=16;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=12;spacingRight=12;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;fontFamily=Trebuchet MS,Verdana,Arial,sans-serif;fontColor=light-dark(#333333,#cccccc);" value="+Heal() void" vertex="1">
+          <mxGeometry height="24" width="722" y="536" as="geometry" />
+        </mxCell>
+        <mxCell id="P125q-w5StolGaf0o1yt-387" parent="P125q-w5StolGaf0o1yt-366" style="text;fontSize=16;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=12;spacingRight=12;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;fontFamily=Trebuchet MS,Verdana,Arial,sans-serif;fontColor=light-dark(#333333,#cccccc);" value="+ShowStatus() string" vertex="1">
+          <mxGeometry height="24" width="722" y="560" as="geometry" />
+        </mxCell>
+        <UserObject label="&lt;b&gt;Dramatic&lt;/b&gt;" mermaidId="n:Dramatic" mermaidBaseStyle="swimlane;html=1;fontStyle=0;fontSize=16;align=center;verticalAlign=middle;horizontal=1;childLayout=stackLayout;startSize=48;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=0;marginTop=12;marginBottom=12;stackSpacing=0;swimlaneFillColor=light-dark(#ECECFF,#1f2020);whiteSpace=wrap;fillColor=light-dark(#ECECFF,#1f2020);strokeColor=light-dark(#9370DB,#cccccc);fontColor=light-dark(#333333,#cccccc);fontFamily=Trebuchet MS,Verdana,Arial,sans-serif;" mermaidBaseValue="&lt;b&gt;Dramatic&lt;/b&gt;" id="P125q-w5StolGaf0o1yt-388">
+          <mxCell parent="P125q-w5StolGaf0o1yt-298" style="swimlane;html=1;fontStyle=0;fontSize=16;align=center;verticalAlign=middle;horizontal=1;childLayout=stackLayout;startSize=48;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=0;marginTop=12;marginBottom=12;stackSpacing=0;swimlaneFillColor=light-dark(#ECECFF,#1f2020);whiteSpace=wrap;fillColor=light-dark(#ECECFF,#1f2020);strokeColor=light-dark(#9370DB,#cccccc);fontColor=light-dark(#333333,#cccccc);fontFamily=Trebuchet MS,Verdana,Arial,sans-serif;" vertex="1">
+            <mxGeometry height="140" width="436" x="3483" y="2062" as="geometry" />
+          </mxCell>
+        </UserObject>
+        <mxCell id="P125q-w5StolGaf0o1yt-389" parent="P125q-w5StolGaf0o1yt-388" style="line;strokeWidth=1;fillColor=none;spacingLeft=3;spacingRight=3;rotatable=0;points=[];strokeColor=inherit;" vertex="1">
+          <mxGeometry height="20" width="436" y="60" as="geometry" />
+        </mxCell>
+        <mxCell id="P125q-w5StolGaf0o1yt-390" parent="P125q-w5StolGaf0o1yt-388" style="text;fontSize=16;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=12;spacingRight=12;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;fontFamily=Trebuchet MS,Verdana,Arial,sans-serif;fontColor=light-dark(#333333,#cccccc);" value="+Dramatic(name, trainer, level, hp, attack, defense)" vertex="1">
+          <mxGeometry height="24" width="436" y="80" as="geometry" />
+        </mxCell>
+        <mxCell id="P125q-w5StolGaf0o1yt-391" parent="P125q-w5StolGaf0o1yt-388" style="text;fontSize=16;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=12;spacingRight=12;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;fontFamily=Trebuchet MS,Verdana,Arial,sans-serif;fontColor=light-dark(#333333,#cccccc);" value="+Behavior() string" vertex="1">
+          <mxGeometry height="24" width="436" y="104" as="geometry" />
+        </mxCell>
+        <UserObject label="&lt;b&gt;Chill&lt;/b&gt;" mermaidId="n:Chill" mermaidBaseStyle="swimlane;html=1;fontStyle=0;fontSize=16;align=center;verticalAlign=middle;horizontal=1;childLayout=stackLayout;startSize=48;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=0;marginTop=12;marginBottom=12;stackSpacing=0;swimlaneFillColor=light-dark(#ECECFF,#1f2020);whiteSpace=wrap;fillColor=light-dark(#ECECFF,#1f2020);strokeColor=light-dark(#9370DB,#cccccc);fontColor=light-dark(#333333,#cccccc);fontFamily=Trebuchet MS,Verdana,Arial,sans-serif;" mermaidBaseValue="&lt;b&gt;Chill&lt;/b&gt;" id="P125q-w5StolGaf0o1yt-392">
+          <mxCell parent="P125q-w5StolGaf0o1yt-298" style="swimlane;html=1;fontStyle=0;fontSize=16;align=center;verticalAlign=middle;horizontal=1;childLayout=stackLayout;startSize=48;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=0;marginTop=12;marginBottom=12;stackSpacing=0;swimlaneFillColor=light-dark(#ECECFF,#1f2020);whiteSpace=wrap;fillColor=light-dark(#ECECFF,#1f2020);strokeColor=light-dark(#9370DB,#cccccc);fontColor=light-dark(#333333,#cccccc);fontFamily=Trebuchet MS,Verdana,Arial,sans-serif;" vertex="1">
+            <mxGeometry height="140" width="386" x="3483" y="1892" as="geometry" />
+          </mxCell>
+        </UserObject>
+        <mxCell id="P125q-w5StolGaf0o1yt-393" parent="P125q-w5StolGaf0o1yt-392" style="line;strokeWidth=1;fillColor=none;spacingLeft=3;spacingRight=3;rotatable=0;points=[];strokeColor=inherit;" vertex="1">
+          <mxGeometry height="20" width="386" y="60" as="geometry" />
+        </mxCell>
+        <mxCell id="P125q-w5StolGaf0o1yt-394" parent="P125q-w5StolGaf0o1yt-392" style="text;fontSize=16;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=12;spacingRight=12;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;fontFamily=Trebuchet MS,Verdana,Arial,sans-serif;fontColor=light-dark(#333333,#cccccc);" value="+Chill(name, trainer, level, hp, attack, defense)" vertex="1">
+          <mxGeometry height="24" width="386" y="80" as="geometry" />
+        </mxCell>
+        <mxCell id="P125q-w5StolGaf0o1yt-395" parent="P125q-w5StolGaf0o1yt-392" style="text;fontSize=16;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=12;spacingRight=12;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;fontFamily=Trebuchet MS,Verdana,Arial,sans-serif;fontColor=light-dark(#333333,#cccccc);" value="+Behavior() string" vertex="1">
+          <mxGeometry height="24" width="386" y="104" as="geometry" />
+        </mxCell>
+        <UserObject label="&lt;b&gt;Chaotic&lt;/b&gt;" mermaidId="n:Chaotic" mermaidBaseStyle="swimlane;html=1;fontStyle=0;fontSize=16;align=center;verticalAlign=middle;horizontal=1;childLayout=stackLayout;startSize=48;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=0;marginTop=12;marginBottom=12;stackSpacing=0;swimlaneFillColor=light-dark(#ECECFF,#1f2020);whiteSpace=wrap;fillColor=light-dark(#ECECFF,#1f2020);strokeColor=light-dark(#9370DB,#cccccc);fontColor=light-dark(#333333,#cccccc);fontFamily=Trebuchet MS,Verdana,Arial,sans-serif;" mermaidBaseValue="&lt;b&gt;Chaotic&lt;/b&gt;" id="P125q-w5StolGaf0o1yt-396">
+          <mxCell parent="P125q-w5StolGaf0o1yt-298" style="swimlane;html=1;fontStyle=0;fontSize=16;align=center;verticalAlign=middle;horizontal=1;childLayout=stackLayout;startSize=48;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=0;marginTop=12;marginBottom=12;stackSpacing=0;swimlaneFillColor=light-dark(#ECECFF,#1f2020);whiteSpace=wrap;fillColor=light-dark(#ECECFF,#1f2020);strokeColor=light-dark(#9370DB,#cccccc);fontColor=light-dark(#333333,#cccccc);fontFamily=Trebuchet MS,Verdana,Arial,sans-serif;" vertex="1">
+            <mxGeometry height="140" width="419" x="3483" y="2856" as="geometry" />
+          </mxCell>
+        </UserObject>
+        <mxCell id="P125q-w5StolGaf0o1yt-397" parent="P125q-w5StolGaf0o1yt-396" style="line;strokeWidth=1;fillColor=none;spacingLeft=3;spacingRight=3;rotatable=0;points=[];strokeColor=inherit;" vertex="1">
+          <mxGeometry height="20" width="419" y="60" as="geometry" />
+        </mxCell>
+        <mxCell id="P125q-w5StolGaf0o1yt-398" parent="P125q-w5StolGaf0o1yt-396" style="text;fontSize=16;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=12;spacingRight=12;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;fontFamily=Trebuchet MS,Verdana,Arial,sans-serif;fontColor=light-dark(#333333,#cccccc);" value="+Chaotic(name, trainer, level, hp, attack, defense)" vertex="1">
+          <mxGeometry height="24" width="419" y="80" as="geometry" />
+        </mxCell>
+        <mxCell id="P125q-w5StolGaf0o1yt-399" parent="P125q-w5StolGaf0o1yt-396" style="text;fontSize=16;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=12;spacingRight=12;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;fontFamily=Trebuchet MS,Verdana,Arial,sans-serif;fontColor=light-dark(#333333,#cccccc);" value="+Behavior() string" vertex="1">
+          <mxGeometry height="24" width="419" y="104" as="geometry" />
+        </mxCell>
+        <UserObject label="&lt;b&gt;Sneaky&lt;/b&gt;" mermaidId="n:Sneaky" mermaidBaseStyle="swimlane;html=1;fontStyle=0;fontSize=16;align=center;verticalAlign=middle;horizontal=1;childLayout=stackLayout;startSize=48;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=0;marginTop=12;marginBottom=12;stackSpacing=0;swimlaneFillColor=light-dark(#ECECFF,#1f2020);whiteSpace=wrap;fillColor=light-dark(#ECECFF,#1f2020);strokeColor=light-dark(#9370DB,#cccccc);fontColor=light-dark(#333333,#cccccc);fontFamily=Trebuchet MS,Verdana,Arial,sans-serif;" mermaidBaseValue="&lt;b&gt;Sneaky&lt;/b&gt;" id="P125q-w5StolGaf0o1yt-400">
+          <mxCell parent="P125q-w5StolGaf0o1yt-298" style="swimlane;html=1;fontStyle=0;fontSize=16;align=center;verticalAlign=middle;horizontal=1;childLayout=stackLayout;startSize=48;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=0;marginTop=12;marginBottom=12;stackSpacing=0;swimlaneFillColor=light-dark(#ECECFF,#1f2020);whiteSpace=wrap;fillColor=light-dark(#ECECFF,#1f2020);strokeColor=light-dark(#9370DB,#cccccc);fontColor=light-dark(#333333,#cccccc);fontFamily=Trebuchet MS,Verdana,Arial,sans-serif;" vertex="1">
+            <mxGeometry height="140" width="468" x="3483" y="2426" as="geometry" />
+          </mxCell>
+        </UserObject>
+        <mxCell id="P125q-w5StolGaf0o1yt-401" parent="P125q-w5StolGaf0o1yt-400" style="line;strokeWidth=1;fillColor=none;spacingLeft=3;spacingRight=3;rotatable=0;points=[];strokeColor=inherit;" vertex="1">
+          <mxGeometry height="20" width="468" y="60" as="geometry" />
+        </mxCell>
+        <mxCell id="P125q-w5StolGaf0o1yt-402" parent="P125q-w5StolGaf0o1yt-400" style="text;fontSize=16;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=12;spacingRight=12;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;fontFamily=Trebuchet MS,Verdana,Arial,sans-serif;fontColor=light-dark(#333333,#cccccc);" value="+Sneaky(name, trainer, level, hp, attackdamage, defense)" vertex="1">
+          <mxGeometry height="24" width="468" y="80" as="geometry" />
+        </mxCell>
+        <mxCell id="P125q-w5StolGaf0o1yt-403" parent="P125q-w5StolGaf0o1yt-400" style="text;fontSize=16;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=12;spacingRight=12;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;fontFamily=Trebuchet MS,Verdana,Arial,sans-serif;fontColor=light-dark(#333333,#cccccc);" value="+Behavior() string" vertex="1">
+          <mxGeometry height="24" width="468" y="104" as="geometry" />
+        </mxCell>
+        <UserObject label="&lt;b&gt;Attack&lt;/b&gt;" mermaidId="n:Attack" mermaidBaseStyle="swimlane;html=1;fontStyle=0;fontSize=16;align=center;verticalAlign=middle;horizontal=1;childLayout=stackLayout;startSize=48;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=0;marginTop=12;marginBottom=12;stackSpacing=0;swimlaneFillColor=light-dark(#ECECFF,#1f2020);whiteSpace=wrap;fillColor=light-dark(#ECECFF,#1f2020);strokeColor=light-dark(#9370DB,#cccccc);fontColor=light-dark(#333333,#cccccc);fontFamily=Trebuchet MS,Verdana,Arial,sans-serif;" mermaidBaseValue="&lt;b&gt;Attack&lt;/b&gt;" id="P125q-w5StolGaf0o1yt-404">
+          <mxCell parent="P125q-w5StolGaf0o1yt-298" style="swimlane;html=1;fontStyle=0;fontSize=16;align=center;verticalAlign=middle;horizontal=1;childLayout=stackLayout;startSize=48;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=0;marginTop=12;marginBottom=12;stackSpacing=0;swimlaneFillColor=light-dark(#ECECFF,#1f2020);whiteSpace=wrap;fillColor=light-dark(#ECECFF,#1f2020);strokeColor=light-dark(#9370DB,#cccccc);fontColor=light-dark(#333333,#cccccc);fontFamily=Trebuchet MS,Verdana,Arial,sans-serif;" vertex="1">
+            <mxGeometry height="164" width="302" x="3981" y="2726" as="geometry" />
+          </mxCell>
+        </UserObject>
+        <mxCell id="P125q-w5StolGaf0o1yt-405" parent="P125q-w5StolGaf0o1yt-404" style="text;fontSize=16;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=12;spacingRight=12;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;fontFamily=Trebuchet MS,Verdana,Arial,sans-serif;fontColor=light-dark(#333333,#cccccc);" value="+Name : string" vertex="1">
+          <mxGeometry height="24" width="302" y="60" as="geometry" />
+        </mxCell>
+        <mxCell id="P125q-w5StolGaf0o1yt-406" parent="P125q-w5StolGaf0o1yt-404" style="text;fontSize=16;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=12;spacingRight=12;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;fontFamily=Trebuchet MS,Verdana,Arial,sans-serif;fontColor=light-dark(#333333,#cccccc);" value="+Damage : int" vertex="1">
+          <mxGeometry height="24" width="302" y="84" as="geometry" />
+        </mxCell>
+        <mxCell id="P125q-w5StolGaf0o1yt-407" parent="P125q-w5StolGaf0o1yt-404" style="line;strokeWidth=1;fillColor=none;spacingLeft=3;spacingRight=3;rotatable=0;points=[];strokeColor=inherit;" vertex="1">
+          <mxGeometry height="20" width="302" y="108" as="geometry" />
+        </mxCell>
+        <mxCell id="P125q-w5StolGaf0o1yt-408" parent="P125q-w5StolGaf0o1yt-404" style="text;fontSize=16;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=12;spacingRight=12;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;fontFamily=Trebuchet MS,Verdana,Arial,sans-serif;fontColor=light-dark(#333333,#cccccc);" value="+Attack(name: string, damage: int)" vertex="1">
+          <mxGeometry height="24" width="302" y="128" as="geometry" />
+        </mxCell>
+        <UserObject label="«interface»&lt;br&gt;&lt;b&gt;IBattle&lt;/b&gt;" mermaidId="n:IBattle" mermaidBaseStyle="swimlane;html=1;fontStyle=0;fontSize=16;align=center;verticalAlign=middle;horizontal=1;childLayout=stackLayout;startSize=72;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=0;marginTop=12;marginBottom=12;stackSpacing=0;swimlaneFillColor=light-dark(#ECECFF,#1f2020);whiteSpace=wrap;fillColor=light-dark(#ECECFF,#1f2020);strokeColor=light-dark(#9370DB,#cccccc);fontColor=light-dark(#333333,#cccccc);fontFamily=Trebuchet MS,Verdana,Arial,sans-serif;" mermaidBaseValue="«interface»&lt;br&gt;&lt;b&gt;IBattle&lt;/b&gt;" id="P125q-w5StolGaf0o1yt-409">
+          <mxCell parent="P125q-w5StolGaf0o1yt-298" style="swimlane;html=1;fontStyle=0;fontSize=16;align=center;verticalAlign=middle;horizontal=1;childLayout=stackLayout;startSize=72;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=0;marginTop=12;marginBottom=12;stackSpacing=0;swimlaneFillColor=light-dark(#ECECFF,#1f2020);whiteSpace=wrap;fillColor=light-dark(#ECECFF,#1f2020);strokeColor=light-dark(#9370DB,#cccccc);fontColor=light-dark(#333333,#cccccc);fontFamily=Trebuchet MS,Verdana,Arial,sans-serif;" vertex="1">
+            <mxGeometry height="164" width="361" x="3483" y="2232" as="geometry" />
+          </mxCell>
+        </UserObject>
+        <mxCell id="P125q-w5StolGaf0o1yt-410" parent="P125q-w5StolGaf0o1yt-409" style="line;strokeWidth=1;fillColor=none;spacingLeft=3;spacingRight=3;rotatable=0;points=[];strokeColor=inherit;" vertex="1">
+          <mxGeometry height="20" width="361" y="84" as="geometry" />
+        </mxCell>
+        <mxCell id="P125q-w5StolGaf0o1yt-411" parent="P125q-w5StolGaf0o1yt-409" style="text;fontSize=16;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=12;spacingRight=12;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;fontFamily=Trebuchet MS,Verdana,Arial,sans-serif;fontColor=light-dark(#333333,#cccccc);" value="+Attack(p2: Pokemon, attack: Attack) int" vertex="1">
+          <mxGeometry height="24" width="361" y="104" as="geometry" />
+        </mxCell>
+        <mxCell id="P125q-w5StolGaf0o1yt-412" parent="P125q-w5StolGaf0o1yt-409" style="text;fontSize=16;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=12;spacingRight=12;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;fontFamily=Trebuchet MS,Verdana,Arial,sans-serif;fontColor=light-dark(#333333,#cccccc);" value="+IsDefeated() bool" vertex="1">
+          <mxGeometry height="24" width="361" y="128" as="geometry" />
+        </mxCell>
+        <UserObject label="«interface»&lt;br&gt;&lt;b&gt;IHeal&lt;/b&gt;" mermaidId="n:IHeal" mermaidBaseStyle="swimlane;html=1;fontStyle=0;fontSize=16;align=center;verticalAlign=middle;horizontal=1;childLayout=stackLayout;startSize=72;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=0;marginTop=12;marginBottom=12;stackSpacing=0;swimlaneFillColor=light-dark(#ECECFF,#1f2020);whiteSpace=wrap;fillColor=light-dark(#ECECFF,#1f2020);strokeColor=light-dark(#9370DB,#cccccc);fontColor=light-dark(#333333,#cccccc);fontFamily=Trebuchet MS,Verdana,Arial,sans-serif;" mermaidBaseValue="«interface»&lt;br&gt;&lt;b&gt;IHeal&lt;/b&gt;" id="P125q-w5StolGaf0o1yt-413">
+          <mxCell parent="P125q-w5StolGaf0o1yt-298" style="swimlane;html=1;fontStyle=0;fontSize=16;align=center;verticalAlign=middle;horizontal=1;childLayout=stackLayout;startSize=72;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=0;marginTop=12;marginBottom=12;stackSpacing=0;swimlaneFillColor=light-dark(#ECECFF,#1f2020);whiteSpace=wrap;fillColor=light-dark(#ECECFF,#1f2020);strokeColor=light-dark(#9370DB,#cccccc);fontColor=light-dark(#333333,#cccccc);fontFamily=Trebuchet MS,Verdana,Arial,sans-serif;" vertex="1">
+            <mxGeometry height="164" width="211" x="3483" y="2596" as="geometry" />
+          </mxCell>
+        </UserObject>
+        <mxCell id="P125q-w5StolGaf0o1yt-414" parent="P125q-w5StolGaf0o1yt-413" style="line;strokeWidth=1;fillColor=none;spacingLeft=3;spacingRight=3;rotatable=0;points=[];strokeColor=inherit;" vertex="1">
+          <mxGeometry height="20" width="211" y="84" as="geometry" />
+        </mxCell>
+        <mxCell id="P125q-w5StolGaf0o1yt-415" parent="P125q-w5StolGaf0o1yt-413" style="text;fontSize=16;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=12;spacingRight=12;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;fontFamily=Trebuchet MS,Verdana,Arial,sans-serif;fontColor=light-dark(#333333,#cccccc);" value="+Heal() void" vertex="1">
+          <mxGeometry height="24" width="211" y="104" as="geometry" />
+        </mxCell>
+        <mxCell id="P125q-w5StolGaf0o1yt-416" parent="P125q-w5StolGaf0o1yt-413" style="text;fontSize=16;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=12;spacingRight=12;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;fontFamily=Trebuchet MS,Verdana,Arial,sans-serif;fontColor=light-dark(#333333,#cccccc);" value="+ShowStatus() string" vertex="1">
+          <mxGeometry height="24" width="211" y="128" as="geometry" />
+        </mxCell>
+        <UserObject label="creates" mermaidId="e:Program-&gt;NiceCute#0" mermaidBaseStyle="curved=1;dashed=1;startArrow=none;endArrow=classic;endSize=9;strokeColor=light-dark(#333333,#cccccc);html=1;fontSize=16;labelBackgroundColor=light-dark(#ECECFF,#1f2020);fontFamily=Trebuchet MS,Verdana,Arial,sans-serif;fontColor=light-dark(#333333,#cccccc);exitX=0.33;exitY=1;entryX=0.5;entryY=0;" mermaidBaseValue="creates" id="P125q-w5StolGaf0o1yt-417">
+          <mxCell edge="1" parent="P125q-w5StolGaf0o1yt-298" source="P125q-w5StolGaf0o1yt-299" style="curved=0;dashed=1;startArrow=none;endArrow=classic;endSize=9;strokeColor=light-dark(#333333,#cccccc);html=1;fontSize=16;labelBackgroundColor=light-dark(#ECECFF,#1f2020);fontFamily=Trebuchet MS,Verdana,Arial,sans-serif;fontColor=light-dark(#333333,#cccccc);fixDash=1;rounded=1;edgeStyle=orthogonalEdgeStyle;exitX=1;exitY=0.3334;entryX=0;entryY=0.5;" target="P125q-w5StolGaf0o1yt-302">
+            <mxGeometry relative="1" as="geometry">
+              <mxPoint x="1" as="offset" />
+              <Array as="points">
+                <mxPoint x="321.5" y="2440" />
+              </Array>
+            </mxGeometry>
+          </mxCell>
+        </UserObject>
+        <UserObject label="creates" mermaidId="e:Program-&gt;Arena#0" mermaidBaseStyle="curved=1;dashed=1;startArrow=none;endArrow=classic;endSize=9;strokeColor=light-dark(#333333,#cccccc);html=1;fontSize=16;labelBackgroundColor=light-dark(#ECECFF,#1f2020);fontFamily=Trebuchet MS,Verdana,Arial,sans-serif;fontColor=light-dark(#333333,#cccccc);exitX=0.66;exitY=1;entryX=0.67;entryY=0;" mermaidBaseValue="creates" id="P125q-w5StolGaf0o1yt-418">
+          <mxCell edge="1" parent="P125q-w5StolGaf0o1yt-298" source="P125q-w5StolGaf0o1yt-299" style="curved=0;dashed=1;startArrow=none;endArrow=classic;endSize=9;strokeColor=light-dark(#333333,#cccccc);html=1;fontSize=16;labelBackgroundColor=light-dark(#ECECFF,#1f2020);fontFamily=Trebuchet MS,Verdana,Arial,sans-serif;fontColor=light-dark(#333333,#cccccc);fixDash=1;rounded=1;edgeStyle=orthogonalEdgeStyle;exitX=1;exitY=0.6667;entryX=0;entryY=0.6667;" target="P125q-w5StolGaf0o1yt-317">
+            <mxGeometry relative="1" as="geometry">
+              <mxPoint x="97.17" as="offset" />
+              <Array as="points">
+                <mxPoint x="277" y="2478.67" />
+                <mxPoint x="277" y="2650" />
+                <mxPoint x="844" y="2650" />
+              </Array>
+            </mxGeometry>
+          </mxCell>
+        </UserObject>
+        <UserObject label="uses" mermaidId="e:NiceCute-&gt;Arena#0" mermaidBaseStyle="curved=1;startArrow=none;endArrow=classic;endSize=9;strokeColor=light-dark(#333333,#cccccc);html=1;fontSize=16;labelBackgroundColor=light-dark(#ECECFF,#1f2020);fontFamily=Trebuchet MS,Verdana,Arial,sans-serif;fontColor=light-dark(#333333,#cccccc);exitX=0.67;exitY=1;entryX=0.33;entryY=0;" mermaidBaseValue="uses" id="P125q-w5StolGaf0o1yt-419">
+          <mxCell edge="1" parent="P125q-w5StolGaf0o1yt-298" source="P125q-w5StolGaf0o1yt-302" style="curved=0;startArrow=none;endArrow=classic;endSize=9;strokeColor=light-dark(#333333,#cccccc);html=1;fontSize=16;labelBackgroundColor=light-dark(#ECECFF,#1f2020);fontFamily=Trebuchet MS,Verdana,Arial,sans-serif;fontColor=light-dark(#333333,#cccccc);rounded=1;edgeStyle=orthogonalEdgeStyle;exitX=1;exitY=0.6667;entryX=0;entryY=0.3333;" target="P125q-w5StolGaf0o1yt-317">
+            <mxGeometry relative="1" as="geometry">
+              <mxPoint x="33" as="offset" />
+              <Array as="points">
+                <mxPoint x="810" y="2483.33" />
+                <mxPoint x="810" y="2547.33" />
+              </Array>
+            </mxGeometry>
+          </mxCell>
+        </UserObject>
+        <UserObject label="uses" mermaidId="e:NiceCute-&gt;PokemonCenter#0" mermaidBaseStyle="curved=1;startArrow=none;endArrow=classic;endSize=9;strokeColor=light-dark(#333333,#cccccc);html=1;fontSize=16;labelBackgroundColor=light-dark(#ECECFF,#1f2020);fontFamily=Trebuchet MS,Verdana,Arial,sans-serif;fontColor=light-dark(#333333,#cccccc);exitX=0.33;exitY=1;entryX=0.33;entryY=0;" mermaidBaseValue="uses" id="P125q-w5StolGaf0o1yt-420">
+          <mxCell edge="1" parent="P125q-w5StolGaf0o1yt-298" source="P125q-w5StolGaf0o1yt-302" style="curved=0;startArrow=none;endArrow=classic;endSize=9;strokeColor=light-dark(#333333,#cccccc);html=1;fontSize=16;labelBackgroundColor=light-dark(#ECECFF,#1f2020);fontFamily=Trebuchet MS,Verdana,Arial,sans-serif;fontColor=light-dark(#333333,#cccccc);rounded=1;edgeStyle=orthogonalEdgeStyle;exitX=1;exitY=0.3333;entryX=0;entryY=0.3333;" target="P125q-w5StolGaf0o1yt-328">
+            <mxGeometry relative="1" as="geometry">
+              <mxPoint x="-3" as="offset" />
+              <Array as="points">
+                <mxPoint x="844" y="2396.67" />
+                <mxPoint x="1308" y="2396.67" />
+              </Array>
+            </mxGeometry>
+          </mxCell>
+        </UserObject>
+        <UserObject label="owns" mermaidId="e:Arena-&gt;PokemonCenter#0" mermaidBaseStyle="curved=1;startArrow=diamondThin;startSize=14;startFill=1;endArrow=none;strokeColor=light-dark(#333333,#cccccc);html=1;fontSize=16;labelBackgroundColor=light-dark(#ECECFF,#1f2020);fontFamily=Trebuchet MS,Verdana,Arial,sans-serif;fontColor=light-dark(#333333,#cccccc);exitX=0.33;exitY=1;entryX=0.67;entryY=0;" mermaidBaseValue="owns" id="P125q-w5StolGaf0o1yt-421">
+          <mxCell edge="1" parent="P125q-w5StolGaf0o1yt-298" source="P125q-w5StolGaf0o1yt-317" style="curved=0;startArrow=diamondThin;startSize=14;startFill=1;endArrow=none;strokeColor=light-dark(#333333,#cccccc);html=1;fontSize=16;labelBackgroundColor=light-dark(#ECECFF,#1f2020);fontFamily=Trebuchet MS,Verdana,Arial,sans-serif;fontColor=light-dark(#333333,#cccccc);rounded=1;edgeStyle=orthogonalEdgeStyle;exitX=1;exitY=0.3333;entryX=0;entryY=0.6667;" target="P125q-w5StolGaf0o1yt-328">
+            <mxGeometry relative="1" as="geometry">
+              <mxPoint x="1" as="offset" />
+              <Array as="points">
+                <mxPoint x="1307" y="2547.33" />
+              </Array>
+            </mxGeometry>
+          </mxCell>
+        </UserObject>
+        <UserObject label="owns" mermaidId="e:Arena-&gt;TeamWH#0" mermaidBaseStyle="curved=1;startArrow=diamondThin;startSize=14;startFill=1;endArrow=none;strokeColor=light-dark(#333333,#cccccc);html=1;fontSize=16;labelBackgroundColor=light-dark(#ECECFF,#1f2020);fontFamily=Trebuchet MS,Verdana,Arial,sans-serif;fontColor=light-dark(#333333,#cccccc);exitX=0.67;exitY=1;entryX=0.67;entryY=0;" mermaidBaseValue="owns" id="P125q-w5StolGaf0o1yt-422">
+          <mxCell edge="1" parent="P125q-w5StolGaf0o1yt-298" source="P125q-w5StolGaf0o1yt-317" style="curved=0;startArrow=diamondThin;startSize=14;startFill=1;endArrow=none;strokeColor=light-dark(#333333,#cccccc);html=1;fontSize=16;labelBackgroundColor=light-dark(#ECECFF,#1f2020);fontFamily=Trebuchet MS,Verdana,Arial,sans-serif;fontColor=light-dark(#333333,#cccccc);rounded=1;edgeStyle=orthogonalEdgeStyle;exitX=1;exitY=0.6667;entryX=0;entryY=0.6667;" target="P125q-w5StolGaf0o1yt-359">
+            <mxGeometry relative="1" as="geometry">
+              <mxPoint x="-100.66" as="offset" />
+              <Array as="points">
+                <mxPoint x="1271" y="2650" />
+                <mxPoint x="1271" y="2858.67" />
+                <mxPoint x="2156" y="2858.67" />
+              </Array>
+            </mxGeometry>
+          </mxCell>
+        </UserObject>
+        <UserObject label="" mermaidId="e:Pokemon-&gt;Dramatic#0" mermaidBaseStyle="curved=1;startArrow=block;startSize=14;startFill=0;endArrow=none;strokeColor=light-dark(#333333,#cccccc);exitX=0.13;exitY=1;entryX=0.5;entryY=0;" mermaidBaseValue="" id="P125q-w5StolGaf0o1yt-423">
+          <mxCell edge="1" parent="P125q-w5StolGaf0o1yt-298" source="P125q-w5StolGaf0o1yt-366" style="curved=0;startArrow=block;startSize=14;startFill=0;endArrow=none;strokeColor=light-dark(#333333,#cccccc);rounded=1;edgeStyle=orthogonalEdgeStyle;exitX=1;exitY=0.25;entryX=0;entryY=0.5;" target="P125q-w5StolGaf0o1yt-388">
+            <mxGeometry relative="1" as="geometry">
+              <Array as="points">
+                <mxPoint x="3457" y="2347" />
+                <mxPoint x="3457" y="2132" />
+              </Array>
+            </mxGeometry>
+          </mxCell>
+        </UserObject>
+        <UserObject label="" mermaidId="e:Pokemon-&gt;Chill#0" mermaidBaseStyle="curved=1;startArrow=block;startSize=14;startFill=0;endArrow=none;strokeColor=light-dark(#333333,#cccccc);exitX=0.25;exitY=1;entryX=0.5;entryY=0;" mermaidBaseValue="" id="P125q-w5StolGaf0o1yt-424">
+          <mxCell edge="1" parent="P125q-w5StolGaf0o1yt-298" source="P125q-w5StolGaf0o1yt-366" style="curved=0;startArrow=block;startSize=14;startFill=0;endArrow=none;strokeColor=light-dark(#333333,#cccccc);rounded=1;edgeStyle=orthogonalEdgeStyle;exitX=1;exitY=0.125;entryX=0;entryY=0.5;" target="P125q-w5StolGaf0o1yt-392">
+            <mxGeometry relative="1" as="geometry">
+              <Array as="points">
+                <mxPoint x="3447" y="2272.5" />
+                <mxPoint x="3447" y="1962" />
+              </Array>
+            </mxGeometry>
+          </mxCell>
+        </UserObject>
+        <UserObject label="" mermaidId="e:Pokemon-&gt;Chaotic#0" mermaidBaseStyle="curved=1;startArrow=block;startSize=14;startFill=0;endArrow=none;strokeColor=light-dark(#333333,#cccccc);exitX=0.38;exitY=1;entryX=0.5;entryY=0;" mermaidBaseValue="" id="P125q-w5StolGaf0o1yt-425">
+          <mxCell edge="1" parent="P125q-w5StolGaf0o1yt-298" source="P125q-w5StolGaf0o1yt-366" style="curved=0;startArrow=block;startSize=14;startFill=0;endArrow=none;strokeColor=light-dark(#333333,#cccccc);rounded=1;edgeStyle=orthogonalEdgeStyle;exitX=1;exitY=0.875;entryX=0;entryY=0.5;" target="P125q-w5StolGaf0o1yt-396">
+            <mxGeometry relative="1" as="geometry">
+              <Array as="points">
+                <mxPoint x="3447" y="2719.5" />
+                <mxPoint x="3447" y="2926" />
+              </Array>
+            </mxGeometry>
+          </mxCell>
+        </UserObject>
+        <UserObject label="" mermaidId="e:Pokemon-&gt;Sneaky#0" mermaidBaseStyle="curved=1;startArrow=block;startSize=14;startFill=0;endArrow=none;strokeColor=light-dark(#333333,#cccccc);exitX=0.5;exitY=1;entryX=0.5;entryY=0;" mermaidBaseValue="" id="P125q-w5StolGaf0o1yt-426">
+          <mxCell edge="1" parent="P125q-w5StolGaf0o1yt-298" source="P125q-w5StolGaf0o1yt-366" style="curved=0;startArrow=block;startSize=14;startFill=0;endArrow=none;strokeColor=light-dark(#333333,#cccccc);rounded=1;edgeStyle=orthogonalEdgeStyle;exitX=1;exitY=0.5;entryX=0;entryY=0.5;" target="P125q-w5StolGaf0o1yt-400">
+            <mxGeometry relative="1" as="geometry">
+              <Array as="points">
+                <mxPoint x="3457" y="2496" />
+              </Array>
+            </mxGeometry>
+          </mxCell>
+        </UserObject>
+        <UserObject label="" mermaidId="e:Trainer-&gt;TeamWH#0" mermaidBaseStyle="curved=1;startArrow=block;startSize=14;startFill=0;endArrow=none;strokeColor=light-dark(#333333,#cccccc);exitX=0.67;exitY=1;entryX=0.33;entryY=0;" mermaidBaseValue="" id="P125q-w5StolGaf0o1yt-427">
+          <mxCell edge="1" parent="P125q-w5StolGaf0o1yt-298" source="P125q-w5StolGaf0o1yt-345" style="curved=0;startArrow=block;startSize=14;startFill=0;endArrow=none;strokeColor=light-dark(#333333,#cccccc);rounded=1;edgeStyle=orthogonalEdgeStyle;exitX=1;exitY=0.6667;entryX=0;entryY=0.3333;" target="P125q-w5StolGaf0o1yt-359">
+            <mxGeometry relative="1" as="geometry">
+              <Array as="points">
+                <mxPoint x="2348" y="2722" />
+                <mxPoint x="2348" y="2788" />
+              </Array>
+            </mxGeometry>
+          </mxCell>
+        </UserObject>
+        <UserObject label="" mermaidId="e:Pokemon-&gt;IBattle#0" mermaidBaseStyle="curved=1;dashed=1;startArrow=none;endArrow=block;endSize=14;endFill=0;strokeColor=light-dark(#333333,#cccccc);exitX=0.63;exitY=1;entryX=0.5;entryY=0;" mermaidBaseValue="" id="P125q-w5StolGaf0o1yt-428">
+          <mxCell edge="1" parent="P125q-w5StolGaf0o1yt-298" source="P125q-w5StolGaf0o1yt-366" style="curved=0;dashed=1;startArrow=none;endArrow=block;endSize=14;endFill=0;strokeColor=light-dark(#333333,#cccccc);fixDash=1;rounded=1;edgeStyle=orthogonalEdgeStyle;exitX=1;exitY=0.375;entryX=0;entryY=0.5;" target="P125q-w5StolGaf0o1yt-409">
+            <mxGeometry relative="1" as="geometry">
+              <Array as="points">
+                <mxPoint x="3467" y="2421.5" />
+                <mxPoint x="3467" y="2314" />
+              </Array>
+            </mxGeometry>
+          </mxCell>
+        </UserObject>
+        <UserObject label="" mermaidId="e:Pokemon-&gt;IHeal#0" mermaidBaseStyle="curved=1;dashed=1;startArrow=none;endArrow=block;endSize=14;endFill=0;strokeColor=light-dark(#333333,#cccccc);exitX=0.75;exitY=1;entryX=0.5;entryY=0;" mermaidBaseValue="" id="P125q-w5StolGaf0o1yt-429">
+          <mxCell edge="1" parent="P125q-w5StolGaf0o1yt-298" source="P125q-w5StolGaf0o1yt-366" style="curved=0;dashed=1;startArrow=none;endArrow=block;endSize=14;endFill=0;strokeColor=light-dark(#333333,#cccccc);fixDash=1;rounded=1;edgeStyle=orthogonalEdgeStyle;exitX=1;exitY=0.625;entryX=0;entryY=0.5;" target="P125q-w5StolGaf0o1yt-413">
+            <mxGeometry relative="1" as="geometry">
+              <Array as="points">
+                <mxPoint x="3467" y="2570.5" />
+                <mxPoint x="3467" y="2678" />
+              </Array>
+            </mxGeometry>
+          </mxCell>
+        </UserObject>
+        <UserObject label="Team" mermaidId="e:Trainer-&gt;Pokemon#0" mermaidBaseStyle="curved=1;startArrow=diamondThin;startSize=14;startFill=0;endArrow=none;strokeColor=light-dark(#333333,#cccccc);html=1;fontSize=16;labelBackgroundColor=light-dark(#ECECFF,#1f2020);fontFamily=Trebuchet MS,Verdana,Arial,sans-serif;fontColor=light-dark(#333333,#cccccc);exitX=0.33;exitY=1;entryX=0.67;entryY=0;" mermaidBaseValue="Team" id="P125q-w5StolGaf0o1yt-430">
+          <mxCell edge="1" parent="P125q-w5StolGaf0o1yt-298" source="P125q-w5StolGaf0o1yt-345" style="curved=0;startArrow=diamondThin;startSize=14;startFill=0;endArrow=none;strokeColor=light-dark(#333333,#cccccc);html=1;fontSize=16;labelBackgroundColor=light-dark(#ECECFF,#1f2020);fontFamily=Trebuchet MS,Verdana,Arial,sans-serif;fontColor=light-dark(#333333,#cccccc);rounded=1;edgeStyle=orthogonalEdgeStyle;exitX=1;exitY=0.3333;entryX=0;entryY=0.6667;" target="P125q-w5StolGaf0o1yt-366">
+            <mxGeometry relative="1" as="geometry">
+              <mxPoint x="1" as="offset" />
+              <Array as="points">
+                <mxPoint x="2520.5" y="2595.33" />
+              </Array>
+            </mxGeometry>
+          </mxCell>
+        </UserObject>
+        <mxCell id="P125q-w5StolGaf0o1yt-431" parent="P125q-w5StolGaf0o1yt-430" style="edgeLabel;resizable=0;labelBackgroundColor=none;fontSize=11;spacing=8;align=right;verticalAlign=top;" value="1" vertex="1">
+          <mxGeometry relative="1" x="-1" as="geometry" />
+        </mxCell>
+        <mxCell id="P125q-w5StolGaf0o1yt-432" parent="P125q-w5StolGaf0o1yt-430" style="edgeLabel;resizable=0;labelBackgroundColor=none;fontSize=11;spacing=8;align=left;verticalAlign=bottom;" value="0..5" vertex="1">
+          <mxGeometry relative="1" x="1" as="geometry" />
+        </mxCell>
+        <UserObject label="manages" mermaidId="e:PokemonCenter-&gt;Pokemon#0" mermaidBaseStyle="curved=1;startArrow=diamondThin;startSize=14;startFill=0;endArrow=none;strokeColor=light-dark(#333333,#cccccc);html=1;fontSize=16;labelBackgroundColor=light-dark(#ECECFF,#1f2020);fontFamily=Trebuchet MS,Verdana,Arial,sans-serif;fontColor=light-dark(#333333,#cccccc);exitX=0.33;exitY=1;entryX=0.33;entryY=0;" mermaidBaseValue="manages" id="P125q-w5StolGaf0o1yt-433">
+          <mxCell edge="1" parent="P125q-w5StolGaf0o1yt-298" source="P125q-w5StolGaf0o1yt-328" style="curved=0;startArrow=diamondThin;startSize=14;startFill=0;endArrow=none;strokeColor=light-dark(#333333,#cccccc);html=1;fontSize=16;labelBackgroundColor=light-dark(#ECECFF,#1f2020);fontFamily=Trebuchet MS,Verdana,Arial,sans-serif;fontColor=light-dark(#333333,#cccccc);rounded=1;edgeStyle=orthogonalEdgeStyle;exitX=1;exitY=0.3333;entryX=0;entryY=0.3333;" target="P125q-w5StolGaf0o1yt-366">
+            <mxGeometry relative="1" as="geometry">
+              <mxPoint x="-123.5" as="offset" />
+              <Array as="points">
+                <mxPoint x="1916" y="2396.67" />
+                <mxPoint x="2521.5" y="2396.67" />
+              </Array>
+            </mxGeometry>
+          </mxCell>
+        </UserObject>
+        <mxCell id="P125q-w5StolGaf0o1yt-434" parent="P125q-w5StolGaf0o1yt-433" style="edgeLabel;resizable=0;labelBackgroundColor=none;fontSize=11;spacing=8;align=right;verticalAlign=top;" value="1" vertex="1">
+          <mxGeometry relative="1" x="-1" as="geometry" />
+        </mxCell>
+        <mxCell id="P125q-w5StolGaf0o1yt-435" parent="P125q-w5StolGaf0o1yt-433" style="edgeLabel;resizable=0;labelBackgroundColor=none;fontSize=11;spacing=8;align=left;verticalAlign=bottom;" value="0..*" vertex="1">
+          <mxGeometry relative="1" x="1" as="geometry" />
+        </mxCell>
+        <UserObject label="manages" mermaidId="e:PokemonCenter-&gt;Trainer#0" mermaidBaseStyle="curved=1;startArrow=diamondThin;startSize=14;startFill=0;endArrow=none;strokeColor=light-dark(#333333,#cccccc);html=1;fontSize=16;labelBackgroundColor=light-dark(#ECECFF,#1f2020);fontFamily=Trebuchet MS,Verdana,Arial,sans-serif;fontColor=light-dark(#333333,#cccccc);exitX=0.67;exitY=1;entryX=0.5;entryY=0;" mermaidBaseValue="manages" id="P125q-w5StolGaf0o1yt-436">
+          <mxCell edge="1" parent="P125q-w5StolGaf0o1yt-298" source="P125q-w5StolGaf0o1yt-328" style="curved=0;startArrow=diamondThin;startSize=14;startFill=0;endArrow=none;strokeColor=light-dark(#333333,#cccccc);html=1;fontSize=16;labelBackgroundColor=light-dark(#ECECFF,#1f2020);fontFamily=Trebuchet MS,Verdana,Arial,sans-serif;fontColor=light-dark(#333333,#cccccc);rounded=1;edgeStyle=orthogonalEdgeStyle;exitX=1;exitY=0.6667;entryX=0;entryY=0.5;" target="P125q-w5StolGaf0o1yt-345">
+            <mxGeometry relative="1" as="geometry">
+              <mxPoint x="50" y="6.67" as="offset" />
+              <Array as="points">
+                <mxPoint x="1866" y="2547.33" />
+                <mxPoint x="1866" y="2658.67" />
+              </Array>
+            </mxGeometry>
+          </mxCell>
+        </UserObject>
+        <mxCell id="P125q-w5StolGaf0o1yt-437" parent="P125q-w5StolGaf0o1yt-436" style="edgeLabel;resizable=0;labelBackgroundColor=none;fontSize=11;spacing=8;align=right;verticalAlign=top;" value="1" vertex="1">
+          <mxGeometry relative="1" x="-1" as="geometry" />
+        </mxCell>
+        <mxCell id="P125q-w5StolGaf0o1yt-438" parent="P125q-w5StolGaf0o1yt-436" style="edgeLabel;resizable=0;labelBackgroundColor=none;fontSize=11;spacing=8;align=left;verticalAlign=bottom;" value="0..*" vertex="1">
+          <mxGeometry relative="1" x="1" as="geometry" />
+        </mxCell>
+        <UserObject label="has" mermaidId="e:Pokemon-&gt;Attack#0" mermaidBaseStyle="curved=1;startArrow=diamondThin;startSize=14;startFill=1;endArrow=none;strokeColor=light-dark(#333333,#cccccc);html=1;fontSize=16;labelBackgroundColor=light-dark(#ECECFF,#1f2020);fontFamily=Trebuchet MS,Verdana,Arial,sans-serif;fontColor=light-dark(#333333,#cccccc);exitX=0.88;exitY=1;entryX=0.5;entryY=0;" mermaidBaseValue="has" id="P125q-w5StolGaf0o1yt-439">
+          <mxCell edge="1" parent="P125q-w5StolGaf0o1yt-298" source="P125q-w5StolGaf0o1yt-366" style="curved=0;startArrow=diamondThin;startSize=14;startFill=1;endArrow=none;strokeColor=light-dark(#333333,#cccccc);html=1;fontSize=16;labelBackgroundColor=light-dark(#ECECFF,#1f2020);fontFamily=Trebuchet MS,Verdana,Arial,sans-serif;fontColor=light-dark(#333333,#cccccc);rounded=1;edgeStyle=orthogonalEdgeStyle;exitX=1;exitY=0.75;entryX=0;entryY=0.5;" target="P125q-w5StolGaf0o1yt-404">
+            <mxGeometry relative="1" as="geometry">
+              <mxPoint x="92.5" as="offset" />
+              <Array as="points">
+                <mxPoint x="3457" y="2645" />
+                <mxPoint x="3457" y="2808" />
+              </Array>
+            </mxGeometry>
+          </mxCell>
+        </UserObject>
+        <mxCell id="P125q-w5StolGaf0o1yt-440" parent="P125q-w5StolGaf0o1yt-439" style="edgeLabel;resizable=0;labelBackgroundColor=none;fontSize=11;spacing=8;align=left;verticalAlign=top;" value="1" vertex="1">
+          <mxGeometry relative="1" x="-1" as="geometry" />
+        </mxCell>
+        <mxCell id="P125q-w5StolGaf0o1yt-441" parent="P125q-w5StolGaf0o1yt-439" style="edgeLabel;resizable=0;labelBackgroundColor=none;fontSize=11;spacing=8;align=right;verticalAlign=bottom;" value="0..4" vertex="1">
+          <mxGeometry relative="1" x="1" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>
