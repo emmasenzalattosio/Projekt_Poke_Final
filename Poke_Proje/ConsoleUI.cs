@@ -51,64 +51,28 @@ namespace Poke_Proje
             Console.WriteLine();
         }
 
-        public static void DrawFrame(string title, IEnumerable<string> lines, ConsoleColor borderColor = ConsoleColor.Cyan, ConsoleColor titleColor = ConsoleColor.Yellow)
+        public static void WriteCenteredScreen(string title, IEnumerable<string> lines, ConsoleColor titleColor = ConsoleColor.Yellow)
         {
-            List<string> content = new List<string>();
-
             if (!string.IsNullOrWhiteSpace(title))
             {
-                content.Add(title);
+                Console.ForegroundColor = titleColor;
+                WriteCentered(title.Trim());
+                Console.ResetColor();
+                WriteCentered(string.Empty);
             }
 
             foreach (string line in lines)
             {
-                if (line != null)
-                {
-                    content.Add(line);
-                }
+                WriteCentered(line ?? string.Empty);
             }
-
-            int rawWidth = Math.Max(36, content.Max(line => line.Length) + 2);
-            int maxWidth = Math.Max(20, Console.WindowWidth - 2); // keep a sliver of free border, don't force-wrap
-            int width = Math.Min(rawWidth, maxWidth);
-            int leftPadding = Math.Max(0, (Console.WindowWidth - (width + 4)) / 2);
-
-            Console.ForegroundColor = borderColor;
-            Console.WriteLine(new string(' ', leftPadding) + "╔" + new string('═', width + 2) + "╗");
-            Console.WriteLine(new string(' ', leftPadding) + "║" + new string(' ', width + 2) + "║");
-
-            Console.ForegroundColor = titleColor;
-            string titleLine = $" {title.Trim()} ";
-            titleLine = titleLine.Length > width + 1 ? titleLine.Substring(0, width + 1) : titleLine.PadRight(width + 1);
-            Console.WriteLine(new string(' ', leftPadding) + "║" + titleLine + "║");
-
-            Console.ForegroundColor = borderColor;
-            Console.WriteLine(new string(' ', leftPadding) + "╠" + new string('═', width + 2) + "╣");
-            Console.ResetColor();
-
-            foreach (string line in content.Skip(!string.IsNullOrWhiteSpace(title) ? 1 : 0))
-            {
-                string display = line.Length > width ? line.Substring(0, width) : line.PadRight(width);
-                Console.Write(new string(' ', leftPadding));
-                Console.Write("║ ");
-                Console.ForegroundColor = ConsoleColor.White;
-                Console.Write(display);
-                Console.ResetColor();
-                Console.WriteLine(" ║");
-            }
-
-            Console.ForegroundColor = borderColor;
-            Console.WriteLine(new string(' ', leftPadding) + "╚" + new string('═', width + 2) + "╝");
-            Console.ResetColor();
         }
 
         /// <summary>
-        /// Draws a single frame that contains one or more "banner" blocks of ASCII art/text
-        /// followed by a selectable menu list. Use this instead of drawing a banner and a
-        /// menu frame separately, so everything ends up inside ONE big frame.
+        /// Prints one or more "banner" blocks of ASCII art/text followed by a selectable
+        /// menu list, all centered on screen (no border).
         /// </summary>
         /// <param name="bannerBlocks">Any number of multi-line text blocks to show above the menu (e.g. logo art). Pass none if not needed.</param>
-        public static void WriteFramedScreen(string title, IEnumerable<string> items, int selectedIndex, ConsoleColor borderColor = ConsoleColor.DarkMagenta, ConsoleColor titleColor = ConsoleColor.Yellow, params string[] bannerBlocks)
+        public static void WriteCenteredMenu(string title, IEnumerable<string> items, int selectedIndex, ConsoleColor titleColor = ConsoleColor.Yellow, params string[] bannerBlocks)
         {
             List<string> lines = new List<string>();
 
@@ -133,7 +97,7 @@ namespace Poke_Proje
                 lines.Add($"{prefix} {options[i]}");
             }
 
-            DrawFrame(title, lines, borderColor, titleColor);
+            WriteCenteredScreen(title, lines, titleColor);
         }
     }
 }

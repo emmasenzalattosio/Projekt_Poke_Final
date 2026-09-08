@@ -43,7 +43,7 @@ namespace Poke_Proje
             {
                 lines.Add($"[{i + 1}] {ass_poke[i].Name} - HP: {ass_poke[i].GetCurrentHp()}/{ass_poke[i].GetMaxHp()}");
             }
-            ConsoleUI.DrawFrame($"🎒 {Name}'s team", lines, ConsoleColor.Cyan, ConsoleColor.Yellow);
+            ConsoleUI.WriteCenteredScreen($"🎒 {Name}'s team", lines, ConsoleColor.Yellow);
 
             int choice = ReadNumber(1, ass_poke.Count);
             return ass_poke[choice - 1];
@@ -74,7 +74,7 @@ namespace Poke_Proje
 
             if (ass_poke.Count == 0)
             {
-                ConsoleUI.DrawFrame($"🎒 {Name}'s Pokémon", new[] { "No Pokémon assigned yet.", "", "Press any key to return to the menu..." }, ConsoleColor.Cyan, ConsoleColor.Yellow);
+                ConsoleUI.WriteCenteredScreen($"🎒 {Name}'s Pokémon", new[] { "No Pokémon assigned yet.", "", "Press any key to return to the menu..." }, ConsoleColor.Yellow);
                 Console.ReadKey(true);
                 return;
             }
@@ -86,7 +86,7 @@ namespace Poke_Proje
             }
             lines.Add(string.Empty);
             lines.Add("Press any key to return to the menu...");
-            ConsoleUI.DrawFrame($"🎒 {Name}'s Pokémon", lines, ConsoleColor.Cyan, ConsoleColor.Yellow);
+            ConsoleUI.WriteCenteredScreen($"🎒 {Name}'s Pokémon", lines, ConsoleColor.Yellow);
 
             Console.ReadKey(true);
         }
@@ -138,7 +138,7 @@ namespace Poke_Proje
 
             lines.Add(string.Empty);
             lines.Add("Press any key to return to the menu...");
-            ConsoleUI.DrawFrame($"💊 {Name}'s team healed", lines, ConsoleColor.Cyan, ConsoleColor.Yellow);
+            ConsoleUI.WriteCenteredScreen($"💊 {Name}'s team healed", lines, ConsoleColor.Yellow);
             Console.ReadKey(true);
         }
 
