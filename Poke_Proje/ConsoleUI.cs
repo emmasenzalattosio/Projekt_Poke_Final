@@ -53,17 +53,34 @@ namespace Poke_Proje
 
         public static void WriteCenteredScreen(string title, IEnumerable<string> lines, ConsoleColor titleColor = ConsoleColor.Yellow)
         {
-            if (!string.IsNullOrWhiteSpace(title))
+            List<string> body = lines.Select(line => line ?? string.Empty).ToList();
+
+            bool hasTitle = !string.IsNullOrWhiteSpace(title);
+            string trimmedTitle = hasTitle ? title.Trim() : string.Empty;
+
+            // Every line (title included) shares ONE left padding, computed from the widest
+            // line in the whole block. This keeps emoji/bullets in the same column instead
+            // of each line being centered on its own (which shifts them row by row).
+            int maxWidth = body.Count > 0 ? body.Max(line => line.Length) : 0;
+            if (hasTitle)
             {
-                Console.ForegroundColor = titleColor;
-                WriteCentered(title.Trim());
-                Console.ResetColor();
-                WriteCentered(string.Empty);
+                maxWidth = Math.Max(maxWidth, trimmedTitle.Length);
             }
 
-            foreach (string line in lines)
+            int leftPadding = Math.Max(0, (Console.WindowWidth - maxWidth) / 2);
+            string pad = new string(' ', leftPadding);
+
+            if (hasTitle)
             {
-                WriteCentered(line ?? string.Empty);
+                Console.ForegroundColor = titleColor;
+                Console.WriteLine(pad + trimmedTitle);
+                Console.ResetColor();
+                Console.WriteLine();
+            }
+
+            foreach (string line in body)
+            {
+                Console.WriteLine(pad + line);
             }
         }
 
