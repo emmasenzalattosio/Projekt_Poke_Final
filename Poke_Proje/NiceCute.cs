@@ -15,11 +15,15 @@ namespace Poke_Proje
             Arena = arena;
         }
 
+        private const string BannerText = @"█▀▀▀▀▀▄   ▄▀▀▀▀▄  █▀▀█ ▀▀█  ▄▀▀▀▀▀█  ▄▀▀▀▀▄▄▀▀▄   ▄▀▀▀▀▄   ▄▀▀▀▀▄ 
+█      █ █      █ █  ▓   █ █      ▓ █          █ █      █ █      █
+█  █▀  █ █  █▀  █ █   ▄▄▀  █  █▀▀▀▀ █  ░   ░   █ █  █▀  █ █  ░   █
+▓  ▀▀ ▄▀ ▓  █▄  █ ▓  ▄  ▀▄ ▓  █▄█▄▄ ▓  ░   ░   █ ▓  █▄  █ ▓  ░   █
+▒  █▀▀   ▒  ▀▀  ▒ ▒  █   ▒ ▒      ▒ ▒  ▒   ▒   ▓ ▒  ▀▀  ▒ ▒  ▒   ▓
+░▄▄█      ▀▄▄▄▄▀  ░▄▄█ ▄▄░  ▀▄▄▄▄▄█ ▒▄▄▓ ▄▄▓ ▄▄▒  ▀▄▄▄▄▀  ▒▄▄▓ ▄▄▒";
+
         public void Start()
         {
-            Console.Clear();
-            DrawBanner();
-
             Trainer? selectedTrainer = SelectTrainer();
             if (selectedTrainer == null)
             {
@@ -43,22 +47,19 @@ namespace Poke_Proje
 
             int selectedIndex = 0;
 
-            while (true)
-            {
-                Console.Clear();
-                DrawBanner();
-                Console.ForegroundColor = ConsoleColor.White;
-                ConsoleUI.WriteCentered(@"   ________                                                       __             _                
+            const string chooseTrainerArt = @"   ________                                                       __             _                
   / ____/ /_  ____  ____  ________     __  ______  __  _______   / /__________ _(_)___  ___  _____
  / /   / __ \/ __ \/ __ \/ ___/ _ \   / / / / __ \/ / / / ___/  / __/ ___/ __ `/ / __ \/ _ \/ ___/
 / /___/ / / / /_/ / /_/ (__  )  __/  / /_/ / /_/ / /_/ / /     / /_/ /  / /_/ / / / / /  __/ /    
 \____/_/ /_/\____/\____/____/\___/   \__, /\____/\__,_/_/      \__/_/   \__,_/_/_/ /_/\___/_/     
-                                    /____/                                                       ");
-                Console.WriteLine();
-                Console.ResetColor();
+                                    /____/                                                       ";
+
+            while (true)
+            {
+                Console.Clear();
 
                 List<string> trainerNames = trainers.Select(t => $"🧑‍🎓 {t.Name} - Chan").ToList();
-                ConsoleUI.WriteMenuFrame("🎮 Choose Your Trainer 🎮", trainerNames, selectedIndex, ConsoleColor.Green);
+                ConsoleUI.WriteFramedScreen("🎮 Choose Your Trainer 🎮", trainerNames, selectedIndex, ConsoleColor.Green, ConsoleColor.Yellow, BannerText, chooseTrainerArt);
 
                 ConsoleKey key = Console.ReadKey(true).Key;
 
@@ -104,10 +105,8 @@ namespace Poke_Proje
             while (true)
             {
                 Console.Clear();
-                DrawBanner();
-                Console.WriteLine();
 
-                ConsoleUI.WriteMenuFrame($"🧢 Trainer: {trainer.Name} 🧢", options, selected, ConsoleColor.DarkMagenta);
+                ConsoleUI.WriteFramedScreen($"🧢 Trainer: {trainer.Name} 🧢", options, selected, ConsoleColor.DarkMagenta, ConsoleColor.Yellow, BannerText);
 
                 ConsoleKey key = Console.ReadKey(true).Key;
 
@@ -140,33 +139,25 @@ namespace Poke_Proje
                             ConsoleUI.WriteCentered("Enter the name of the Pokémon you want to search:");
                             string searchName = Console.ReadLine() ?? string.Empty;
                             Center.SearchPokemon(searchName);
-                            ConsoleUI.WriteCentered("\nPress any key to go back to the main menu...");
                             Console.ReadKey(true);
                             break;
 
                         case 2:
                             Console.Clear();
                             Center.ShowAllTrainers();
-                            ConsoleUI.WriteCentered("\nPress any key to go back to the main menu...");
                             Console.ReadKey(true);
                             break;
 
                         case 3:
                             Arena.StartBattle(trainer);
-                            ConsoleUI.WriteCentered("\nPress any key to go back to the main menu...");
-                            Console.ReadKey(true);
                             break;
 
                         case 4:
                             trainer.HealTeam();
-                            ConsoleUI.WriteCentered("\nPress any key to go back to the main menu...");
-                            Console.ReadKey(true);
                             break;
 
                         case 5:
                             Arena.RocketEncounter(trainer);
-                            ConsoleUI.WriteCentered("\nPress any key to go back to the main menu...");
-                            Console.ReadKey(true);
                             break;
 
                         case 6:
@@ -177,22 +168,6 @@ namespace Poke_Proje
                     }
                 }
             }
-        }
-
-
-        private static void DrawBanner()
-        {
-
-
-            Console.ForegroundColor = ConsoleColor.Red;
-            ConsoleUI.WriteCentered(@"█▀▀▀▀▀▄   ▄▀▀▀▀▄  █▀▀█ ▀▀█  ▄▀▀▀▀▀█  ▄▀▀▀▀▄▄▀▀▄   ▄▀▀▀▀▄   ▄▀▀▀▀▄ 
-█      █ █      █ █  ▓   █ █      ▓ █          █ █      █ █      █
-█  █▀  █ █  █▀  █ █   ▄▄▀  █  █▀▀▀▀ █  ░   ░   █ █  █▀  █ █  ░   █
-▓  ▀▀ ▄▀ ▓  █▄  █ ▓  ▄  ▀▄ ▓  █▄█▄▄ ▓  ░   ░   █ ▓  █▄  █ ▓  ░   █
-▒  █▀▀   ▒  ▀▀  ▒ ▒  █   ▒ ▒      ▒ ▒  ▒   ▒   ▓ ▒  ▀▀  ▒ ▒  ▒   ▓
-░▄▄█      ▀▄▄▄▄▀  ░▄▄█ ▄▄░  ▀▄▄▄▄▄█ ▒▄▄▓ ▄▄▓ ▄▄▒  ▀▄▄▄▄▀  ▒▄▄▓ ▄▄▒");
-           
-            Console.ResetColor();
         }
 
 
