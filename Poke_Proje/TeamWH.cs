@@ -21,18 +21,19 @@ namespace Poke_Proje
             };
         }
 
-        public void StealPokemon(Trainer victim)
+        public List<string> StealPokemon(Trainer victim)
         {
-            Console.ForegroundColor = ConsoleColor.Magenta;
-            Console.WriteLine($"\n!!! TEAM WH APPEARED OUTTA NOWHERE !!!");
-            Console.WriteLine($"{Name}: \"{evilQuotes[rnd.Next(evilQuotes.Length)]}\"");
-            Console.ResetColor();
+            List<string> lines = new List<string>
+            {
+                "!!! TEAM WH APPEARED OUTTA NOWHERE !!!",
+                $"{Name}: \"{evilQuotes[rnd.Next(evilQuotes.Length)]}\""
+            };
 
             if (!victim.HasPokemon())
             {
-                Console.WriteLine($"{Name}: \"Bruh you broke, aint got no pokeon to steal lmao\"");
-                Console.WriteLine("*Team WH walks away disappointed*");
-                return;
+                lines.Add($"{Name}: \"Bruh you broke, aint got no pokeon to steal lmao\"");
+                lines.Add("*Team WH walks away disappointed*");
+                return lines;
             }
 
             // yoink all the pokeon
@@ -43,19 +44,13 @@ namespace Poke_Proje
             {
                 this.ass_poke.Add(p);
                 p.SetTrainer(this.Name);
-                Console.WriteLine($"{Name} stole {p.Name}!! *yoink*");
+                lines.Add($"{Name} stole {p.Name}!! *yoink*");
             }
 
-            Console.ForegroundColor = ConsoleColor.Magenta;
-            Console.WriteLine($"\n{Name}: \"Wanna be a real trainer?? Then come get them back!!\"");
-            Console.WriteLine($"{Name}: \"But first you gotta git gud lol\"");
-            Console.ResetColor();
-        }
-
-        public void AskToBecomeRealTrainer()
-        {
-            Console.WriteLine("\n---> Press [Y] if you wanna be a real trainer and fight for your pokeon back <---");
-            Console.WriteLine("---> Press [N] if you a coward and keep crying <---");
+            lines.Add(string.Empty);
+            lines.Add($"{Name}: \"Wanna be a real trainer?? Then come get them back!!\"");
+            lines.Add($"{Name}: \"But first you gotta git gud lol\"");
+            return lines;
         }
     }
 }

@@ -65,6 +65,8 @@ namespace Poke_Proje
             {
                 lines.Add($"- {t.Name} ({t.ass_poke.Count} Pokémon)");
             }
+            lines.Add(string.Empty);
+            lines.Add("Press any key to return to the menu...");
             ConsoleUI.DrawFrame("👥 All Trainers", lines, ConsoleColor.Cyan, ConsoleColor.Yellow);
         }
 
@@ -83,11 +85,11 @@ namespace Poke_Proje
 
             if (found != null)
             {
-                ConsoleUI.DrawFrame($"✅ Gefunden {found.Name}", new[] { found.ShowStatus().TrimEnd('\n', '\r') }, ConsoleColor.Green, ConsoleColor.Yellow);
+                ConsoleUI.DrawFrame($"✅ Gefunden {found.Name}", new[] { found.ShowStatus().TrimEnd('\n', '\r'), "", "Press any key to return to the menu..." }, ConsoleColor.Green, ConsoleColor.Yellow);
             }
             else
             {
-                ConsoleUI.DrawFrame("❌ Suchergebnis", new[] { "Pokemon nicht gefunden" }, ConsoleColor.Red, ConsoleColor.Yellow);
+                ConsoleUI.DrawFrame("❌ Suchergebnis", new[] { "Pokemon nicht gefunden", "", "Press any key to return to the menu..." }, ConsoleColor.Red, ConsoleColor.Yellow);
             }
 
             return found;

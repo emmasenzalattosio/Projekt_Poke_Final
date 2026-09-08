@@ -74,8 +74,7 @@ namespace Poke_Proje
 
             if (ass_poke.Count == 0)
             {
-                ConsoleUI.DrawFrame($"🎒 {Name}'s Pokémon", new[] { "No Pokémon assigned yet." }, ConsoleColor.Cyan, ConsoleColor.Yellow);
-                Console.WriteLine("\nPress any key to return to the menu...");
+                ConsoleUI.DrawFrame($"🎒 {Name}'s Pokémon", new[] { "No Pokémon assigned yet.", "", "Press any key to return to the menu..." }, ConsoleColor.Cyan, ConsoleColor.Yellow);
                 Console.ReadKey(true);
                 return;
             }
@@ -85,9 +84,10 @@ namespace Poke_Proje
             {
                 lines.Add(p.ShowStatus().TrimEnd('\n', '\r'));
             }
+            lines.Add(string.Empty);
+            lines.Add("Press any key to return to the menu...");
             ConsoleUI.DrawFrame($"🎒 {Name}'s Pokémon", lines, ConsoleColor.Cyan, ConsoleColor.Yellow);
 
-            Console.WriteLine("Press any key to return to the menu...");
             Console.ReadKey(true);
         }
 
@@ -119,18 +119,27 @@ namespace Poke_Proje
 
         public void HealTeam()
         {
+            Console.Clear();
+
+            List<string> lines = new List<string>();
+
             if (ass_poke.Count == 0)
             {
-                Console.WriteLine($"{Name} has no Pokémon to heal.");
-                return;
+                lines.Add($"{Name} has no Pokémon to heal.");
+            }
+            else
+            {
+                foreach (Pokemon p in ass_poke)
+                {
+                    p.Heal();
+                    lines.Add($"{p.Name}: {p.GetCurrentHp()}/{p.GetMaxHp()}");
+                }
             }
 
-            Console.WriteLine($"{Name} is healing the whole team...");
-            foreach (Pokemon p in ass_poke)
-            {
-                p.Heal();
-                Console.WriteLine($"{p.Name}: {p.GetCurrentHp()}/{p.GetMaxHp()}");
-            }
+            lines.Add(string.Empty);
+            lines.Add("Press any key to return to the menu...");
+            ConsoleUI.DrawFrame($"💊 {Name}'s team healed", lines, ConsoleColor.Cyan, ConsoleColor.Yellow);
+            Console.ReadKey(true);
         }
 
         public void ClearTeam()

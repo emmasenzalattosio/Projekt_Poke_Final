@@ -99,20 +99,6 @@ namespace Poke_Proje
             Console.ResetColor();
         }
 
-        public static void WriteMenuFrame(string title, IEnumerable<string> items, int selectedIndex, ConsoleColor borderColor = ConsoleColor.DarkMagenta)
-        {
-            List<string> options = items.ToList();
-            List<string> lines = new List<string>();
-
-            for (int i = 0; i < options.Count; i++)
-            {
-                string prefix = i == selectedIndex ? "▶" : " ";
-                lines.Add($"{prefix} {options[i]}");
-            }
-
-            DrawFrame(title, lines, borderColor, ConsoleColor.Yellow);
-        }
-
         /// <summary>
         /// Draws a single frame that contains one or more "banner" blocks of ASCII art/text
         /// followed by a selectable menu list. Use this instead of drawing a banner and a
